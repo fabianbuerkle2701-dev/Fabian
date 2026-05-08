@@ -10,14 +10,18 @@
 
     :root {
       --bg: #ffffff;
-      --surface: #f8fafc;
-      --accent: #1e40af;
+      --surface: #f0f7ff;
+      --accent: #1d4ed8;
       --accent-light: #3b82f6;
       --accent-hover: #1e3a8a;
+      --accent2: #0ea5e9;
+      --accent3: #7c3aed;
+      --green: #059669;
+      --orange: #ea580c;
       --text: #0f172a;
       --muted: #475569;
       --light: #94a3b8;
-      --border: #e2e8f0;
+      --border: #bfdbfe;
       --radius: 8px;
     }
 
@@ -60,17 +64,14 @@
     }
 
     .nav-logo-icon {
-      width: 38px;
-      height: 38px;
-      background: var(--accent);
-      border-radius: 8px;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-weight: 800;
-      font-size: 0.9rem;
-      letter-spacing: -0.02em;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
     .nav-logo-text {
@@ -112,7 +113,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
       color: white !important;
       padding: 9px 20px;
       border-radius: var(--radius);
@@ -122,12 +123,12 @@
       transition: background 0.2s;
     }
 
-    .nav-phone:hover { background: var(--accent-hover) !important; }
+    .nav-phone:hover { opacity: 0.9 !important; }
 
     /* HERO */
     .hero {
       padding: 110px 32px 0;
-      background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+      background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 50%, #f0fdf4 100%);
       overflow: hidden;
     }
 
@@ -192,20 +193,21 @@
     }
 
     .btn-primary {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
       color: white;
       padding: 13px 26px;
       border-radius: var(--radius);
       font-weight: 700;
       font-size: 0.9rem;
       text-decoration: none;
-      transition: background 0.2s;
+      transition: opacity 0.2s, transform 0.1s;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      box-shadow: 0 4px 14px rgba(29,78,216,0.3);
     }
 
-    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
 
     .btn-outline {
       background: white;
@@ -320,7 +322,7 @@
     /* ÜBER UNS */
     #ueber-uns {
       padding: 96px 32px;
-      background: var(--bg);
+      background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
     }
 
     .section-inner { max-width: 1200px; margin: 0 auto; }
@@ -388,8 +390,8 @@
     .about-qual {
       margin-top: 32px;
       padding: 24px;
-      background: #eff6ff;
-      border-left: 4px solid var(--accent);
+      background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
+      border-left: 4px solid var(--accent-light);
       border-radius: 0 8px 8px 0;
     }
 
@@ -460,8 +462,14 @@
     /* LEISTUNGEN */
     #leistungen {
       padding: 96px 32px;
-      background: var(--surface);
+      background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);
+      color: white;
     }
+
+    #leistungen .section-eyebrow-line { background: rgba(255,255,255,0.6); }
+    #leistungen .section-eyebrow span { color: rgba(255,255,255,0.85); }
+    #leistungen .section-title { color: white; }
+    #leistungen .section-sub { color: rgba(255,255,255,0.75); }
 
     .services-grid {
       display: grid;
@@ -470,15 +478,16 @@
     }
 
     .service-card {
-      background: white;
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
       border-radius: var(--radius);
       padding: 28px;
-      transition: box-shadow 0.2s, transform 0.2s;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, transform 0.2s;
     }
 
     .service-card:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.2);
       transform: translateY(-2px);
     }
 
@@ -486,28 +495,28 @@
       font-size: 0.7rem;
       font-weight: 800;
       letter-spacing: 0.1em;
-      color: var(--accent-light);
+      color: rgba(255,255,255,0.6);
       margin-bottom: 14px;
     }
 
     .service-card h3 {
       font-size: 1.05rem;
       font-weight: 700;
-      color: var(--text);
+      color: white;
       margin-bottom: 10px;
     }
 
     .service-card p {
       font-size: 0.875rem;
-      color: var(--muted);
+      color: rgba(255,255,255,0.75);
       line-height: 1.7;
     }
 
     .service-tag {
       display: inline-block;
       margin-top: 14px;
-      background: #eff6ff;
-      color: var(--accent);
+      background: rgba(255,255,255,0.2);
+      color: white;
       font-size: 0.72rem;
       font-weight: 700;
       padding: 3px 10px;
@@ -517,7 +526,7 @@
     /* REGION */
     #region {
       padding: 96px 32px;
-      background: var(--bg);
+      background: linear-gradient(180deg, #f0fdf4 0%, #eff6ff 100%);
     }
 
     .region-layout {
@@ -558,14 +567,14 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--accent-light);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--green) 100%);
       flex-shrink: 0;
     }
 
     /* KONTAKT */
     #kontakt {
       padding: 96px 32px;
-      background: var(--surface);
+      background: linear-gradient(135deg, #f0f7ff 0%, #faf5ff 100%);
     }
 
     .contact-layout {
@@ -616,7 +625,7 @@
     .contact-icon {
       width: 40px;
       height: 40px;
-      background: #eff6ff;
+      background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -695,7 +704,7 @@
 
     .form-submit {
       width: 100%;
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
       color: white;
       border: none;
       border-radius: var(--radius);
@@ -707,7 +716,7 @@
       font-family: inherit;
     }
 
-    .form-submit:hover { background: var(--accent-hover); }
+    .form-submit:hover { opacity: 0.9; }
 
     /* FOOTER */
     footer {
@@ -822,7 +831,26 @@
   <nav>
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <div class="nav-logo-icon">ZA</div>
+        <div class="nav-logo-icon">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="42" height="42" rx="10" fill="url(#logoGrad)"/>
+            <!-- Car silhouette -->
+            <path d="M8 26 L10 20 L13 17 L21 16 L29 17 L32 20 L34 26 Z" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/>
+            <path d="M14 19 L16 17 L26 17 L28 19 Z" fill="rgba(255,255,255,0.35)"/>
+            <circle cx="13" cy="26" r="3" fill="white" opacity="0.9"/>
+            <circle cx="29" cy="26" r="3" fill="white" opacity="0.9"/>
+            <circle cx="13" cy="26" r="1.5" fill="url(#logoGrad)"/>
+            <circle cx="29" cy="26" r="1.5" fill="url(#logoGrad)"/>
+            <!-- ZA letters -->
+            <text x="21" y="14" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="7" fill="white" opacity="0.95">ZA</text>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#1d4ed8"/>
+                <stop offset="100%" stop-color="#0ea5e9"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
         <div class="nav-logo-text">
           <span class="nav-logo-name">Zekai Acigöz</span>
           <span class="nav-logo-sub">KFZ-Sachverständiger</span>
