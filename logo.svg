@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
-  <!-- Z - cyan -->
-  <text x="30" y="430" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="420" fill="#00C8E0">Z</text>
-  <!-- A - black, overlapping right -->
-  <text x="185" y="430" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-weight="900" font-size="420" fill="#111111">A</text>
+  <!-- Z - cyan, mit etwas Padding damit es nicht abgeschnitten wird -->
+  <text x="20" y="400" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="380" fill="#00C8E0">Z</text>
+  <!-- A - black, überlappend -->
+  <text x="175" y="400" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-weight="900" font-size="380" fill="#111111">A</text>
 </svg>
