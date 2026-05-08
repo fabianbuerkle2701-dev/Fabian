@@ -820,6 +820,119 @@
     .footer-legal a { font-size: 0.8rem; color: #94a3b8; text-decoration: none; transition: color 0.2s; }
     .footer-legal a:hover { color: white; }
 
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-32px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(32px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(29,78,216,0.4); }
+      50%       { box-shadow: 0 0 0 6px rgba(29,78,216,0); }
+    }
+
+    /* Scroll-reveal base state */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .reveal.from-left  { transform: translateX(-32px); }
+    .reveal.from-right { transform: translateX(32px); }
+    .reveal.scale      { transform: scale(0.94); }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translate(0) scale(1);
+    }
+
+    /* stagger children */
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.55s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger.visible > *:nth-child(2) { transition-delay: 0.13s; }
+    .stagger.visible > *:nth-child(3) { transition-delay: 0.21s; }
+    .stagger.visible > *:nth-child(4) { transition-delay: 0.29s; }
+    .stagger.visible > *:nth-child(5) { transition-delay: 0.37s; }
+    .stagger.visible > *:nth-child(6) { transition-delay: 0.45s; }
+
+    .stagger.visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero entrance */
+    .hero-eyebrow  { animation: fadeUp 0.6s 0.1s both; }
+    .hero h1       { animation: fadeUp 0.7s 0.2s both; }
+    .hero-desc     { animation: fadeUp 0.6s 0.35s both; }
+    .hero-actions  { animation: fadeUp 0.6s 0.45s both; }
+    .hero-trust    { animation: fadeUp 0.6s 0.55s both; }
+    .hero-img-wrap { animation: slideInRight 0.8s 0.3s both; }
+
+    /* Float on hero card */
+    .hero-card { animation: float 5s ease-in-out infinite; }
+
+    /* Nav scroll shadow */
+    nav { transition: box-shadow 0.3s; }
+    nav.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+
+    /* Card hover lifts */
+    .service-card  { transition: background 0.2s, transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s; }
+    .about-card    { transition: background 0.2s, transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s; }
+    .contact-item  { transition: border-color 0.2s, box-shadow 0.25s, transform 0.2s; }
+
+    .about-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    }
+
+    .contact-item:hover { transform: translateY(-2px); }
+
+    /* Button press effect */
+    .btn-primary:active,
+    .btn-outline:active,
+    .form-submit:active { transform: scale(0.97); }
+
+    /* Dot pulse */
+    .hero-service-row .dot { animation: pulse-dot 2.5s ease-in-out infinite; }
+
     /* IMAGE PLACEHOLDER */
     .img-placeholder {
       width: 100%;
@@ -1074,7 +1187,7 @@
   <!-- ÜBER MICH -->
   <section id="ueber-uns">
     <div class="section-inner">
-      <div class="about-grid">
+      <div class="about-grid reveal">
         <div class="about-text">
           <div class="section-eyebrow">
             <div class="section-eyebrow-line"></div>
@@ -1096,7 +1209,7 @@
             </ul>
           </div>
         </div>
-        <div class="about-cards">
+        <div class="about-cards stagger">
           <div class="img-placeholder" style="height:220px; border-radius:12px; margin-bottom:16px;">
             <svg width="36" height="36" fill="none" viewBox="0 0 24 24"><path stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle stroke="#94a3b8" stroke-width="1.5" cx="12" cy="13" r="3"/></svg>
             <span>Bild einfügen</span>
@@ -1143,7 +1256,7 @@
       </div>
       <h2 class="section-title">Was ich für Sie tue</h2>
       <p class="section-sub">Von der kostenlosen Ersteinschätzung bis zum gerichtsfesten Gutachten — fundiert, transparent und anerkannt.</p>
-      <div class="services-grid">
+      <div class="services-grid stagger">
         <div class="service-card">
           <div class="service-num">01</div>
           <h3>Unfallgutachten</h3>
@@ -1191,7 +1304,7 @@
   <!-- REGION -->
   <section id="region">
     <div class="section-inner">
-      <div class="region-layout">
+      <div class="region-layout reveal">
         <div class="region-text">
           <div class="section-eyebrow">
             <div class="section-eyebrow-line"></div>
@@ -1202,7 +1315,7 @@
           <p>Kein langer Anfahrtsweg für Sie: Ich bringe meine Expertise dorthin, wo Sie mich brauchen — zur Werkstatt, nach Hause oder direkt an die Unfallstelle.</p>
           <a href="#kontakt" class="btn-primary" style="margin-top:8px; display:inline-flex;">Termin vereinbaren</a>
         </div>
-        <div class="region-grid">
+        <div class="region-grid stagger">
           <div class="region-item">Offenburg</div>
           <div class="region-item">Lahr/Schwarzwald</div>
           <div class="region-item">Kehl</div>
@@ -1227,7 +1340,7 @@
       </div>
       <h2 class="section-title">Sprechen Sie mich an</h2>
       <p class="section-sub">Kostenlose Erstberatung — ich melde mich so schnell wie möglich bei Ihnen zurück.</p>
-      <div class="contact-layout">
+      <div class="contact-layout reveal">
         <div class="contact-left">
           <div class="img-placeholder" style="height:200px; border-radius:12px; margin-bottom:24px;">
             <svg width="36" height="36" fill="none" viewBox="0 0 24 24"><path stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle stroke="#94a3b8" stroke-width="1.5" cx="12" cy="13" r="3"/></svg>
@@ -1343,5 +1456,30 @@
     </div>
   </footer>
 
+  <script>
+    // Scroll-reveal via IntersectionObserver
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal, .stagger').forEach(el => revealObserver.observe(el));
+
+    // Section titles reveal on scroll
+    document.querySelectorAll('.section-title, .section-sub, .section-eyebrow, .hero-card-title').forEach(el => {
+      el.classList.add('reveal');
+      revealObserver.observe(el);
+    });
+
+    // Nav shadow on scroll
+    const navEl = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      navEl.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+  </script>
 </body>
 </html>
