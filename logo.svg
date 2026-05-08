@@ -1,6 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
-  <!-- Z - cyan, mit etwas Padding damit es nicht abgeschnitten wird -->
-  <text x="20" y="400" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="380" fill="#00C8E0">Z</text>
-  <!-- A - black, überlappend -->
-  <text x="175" y="400" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-weight="900" font-size="380" fill="#111111">A</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <linearGradient id="gold" x1="10%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" stop-color="#d4aa52"/>
+      <stop offset="100%" stop-color="#8a6520"/>
+    </linearGradient>
+  </defs>
+  <!-- A in gold (behind Z) -->
+  <path d="M 188,22 L 100,272 L 134,272 L 188,96 L 242,272 L 276,272 Z" fill="url(#gold)"/>
+  <!-- Z in dark charcoal (front) -->
+  <path d="M 28,38 L 222,38 L 222,80 L 84,214 L 224,214 L 224,258 L 28,258 L 28,216 L 166,82 L 28,82 Z" fill="#2c2c2c"/>
 </svg>
