@@ -13,17 +13,17 @@
 
     :root {
       --bg: #ffffff;
-      --surface: #f5f5f3;
+      --surface: #f8f9fc;
       --surface2: #ececea;
-      --hero-bg: #0e0e0e;
+      --hero-bg: #EBF4FF;
       --accent: #1d4ed8;
       --accent-light: #3b82f6;
       --accent-hover: #1e3a8a;
       --accent2: #2563eb;
-      --text: #111111;
-      --muted: #5a5a5a;
+      --text: #1a1a2e;
+      --muted: #64748b;
       --light: #9a9a9a;
-      --border: #d6d6d4;
+      --border: #e2e8f0;
       --border-dark: #2a2a2a;
       --radius: 2px;
       --font-display: 'Barlow Condensed', sans-serif;
@@ -40,17 +40,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── GRAIN TEXTURE OVERLAY ─── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.028;
-      mix-blend-mode: multiply;
-    }
+    /* ─── GRAIN TEXTURE OVERLAY (removed for light design) ─── */
 
     /* ─── NAV ─── */
     nav {
@@ -155,11 +145,11 @@
     .hero {
       position: relative;
       padding: 126px 32px 0;
-      background: var(--hero-bg);
+      background: linear-gradient(135deg, #EBF4FF 0%, #f0f7ff 60%, #e8f0fe 100%);
       overflow: hidden;
     }
 
-    /* Diagonal racing stripe */
+    /* Diagonal racing stripe — transparent for light design */
     .hero::after {
       content: '';
       position: absolute;
@@ -167,12 +157,7 @@
       right: -5%;
       width: 48%;
       height: 130%;
-      background: linear-gradient(
-        135deg,
-        rgba(29,78,216,0.12) 0%,
-        rgba(29,78,216,0.05) 40%,
-        transparent 70%
-      );
+      background: transparent;
       transform: skewX(-8deg);
       pointer-events: none;
       z-index: 0;
@@ -210,7 +195,7 @@
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
+      color: var(--accent);
     }
 
     .hero h1 {
@@ -220,7 +205,7 @@
       line-height: 1.0;
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      color: #ffffff;
+      color: #1a1a2e;
       margin-bottom: 24px;
     }
 
@@ -232,7 +217,7 @@
 
     .hero-desc {
       font-size: 1rem;
-      color: rgba(255,255,255,0.6);
+      color: #64748b;
       line-height: 1.8;
       margin-bottom: 40px;
       max-width: 480px;
@@ -271,7 +256,7 @@
 
     .btn-outline {
       background: transparent;
-      color: rgba(255,255,255,0.75);
+      color: var(--accent);
       padding: 14px 28px;
       border-radius: 2px;
       font-family: var(--font-display);
@@ -280,14 +265,13 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       text-decoration: none;
-      border: 1.5px solid rgba(255,255,255,0.25);
+      border: 1.5px solid var(--accent);
       transition: border-color 0.2s, color 0.2s, background 0.2s;
     }
 
     .btn-outline:hover {
-      border-color: rgba(255,255,255,0.6);
-      color: #ffffff;
-      background: rgba(255,255,255,0.06);
+      background: var(--accent);
+      color: white;
     }
 
     /* Override btn-outline in light sections */
@@ -313,7 +297,7 @@
       display: flex;
       gap: 28px;
       padding-top: 32px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid #e2e8f0;
     }
 
     .trust-item { display: flex; align-items: center; gap: 10px; }
@@ -321,8 +305,8 @@
     .trust-icon {
       width: 36px;
       height: 36px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: white;
+      border: 1px solid #e2e8f0;
       border-radius: 2px;
       display: flex;
       align-items: center;
@@ -334,10 +318,10 @@
     .trust-text {
       font-size: 0.8rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.85);
+      color: #1a1a2e;
       line-height: 1.3;
     }
-    .trust-text span { display: block; color: rgba(255,255,255,0.4); font-weight: 400; }
+    .trust-text span { display: block; color: #64748b; font-weight: 400; }
 
     .hero-visual {
       display: flex;
@@ -362,12 +346,12 @@
     }
 
     .hero-card {
-      background: rgba(20,20,20,0.95);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-top: 3px solid var(--accent);
       border-radius: 0 0 2px 2px;
       padding: 28px 32px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
       width: 100%;
     }
 
@@ -377,7 +361,7 @@
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--accent-light);
+      color: var(--accent);
       margin-bottom: 18px;
     }
 
@@ -393,18 +377,18 @@
       align-items: center;
       gap: 10px;
       padding: 10px 14px;
-      background: rgba(255,255,255,0.05);
+      background: #f8f9fc;
       border-radius: 2px;
       font-size: 0.85rem;
       font-weight: 500;
-      color: rgba(255,255,255,0.8);
+      color: #1a1a2e;
       border-left: 2px solid transparent;
       transition: border-color 0.2s, background 0.2s;
     }
 
     .hero-service-row:hover {
       border-left-color: var(--accent);
-      background: rgba(29,78,216,0.1);
+      background: #EBF4FF;
     }
 
     .hero-service-row .dot {
@@ -417,7 +401,7 @@
 
     .hero-card-footer {
       padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid #e2e8f0;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -425,12 +409,12 @@
 
     .hero-card-footer-text {
       font-size: 0.78rem;
-      color: rgba(255,255,255,0.4);
+      color: #64748b;
     }
 
     .hero-card-footer-badge {
-      background: rgba(29,78,216,0.25);
-      color: var(--accent-light);
+      background: #EBF4FF;
+      color: var(--accent);
       font-family: var(--font-display);
       font-size: 0.7rem;
       font-weight: 700;
@@ -438,7 +422,7 @@
       text-transform: uppercase;
       padding: 4px 12px;
       border-radius: 2px;
-      border: 1px solid rgba(29,78,216,0.4);
+      border: 1px solid #bfdbfe;
     }
 
     /* ─── SECTION COMMONS ─── */
@@ -607,8 +591,7 @@
     /* ─── LEISTUNGEN ─── */
     #leistungen {
       padding: 104px 32px;
-      background: var(--hero-bg);
-      color: white;
+      background: #f8f9fc;
       position: relative;
       overflow: hidden;
     }
@@ -617,21 +600,15 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: repeating-linear-gradient(
-        -55deg,
-        transparent,
-        transparent 80px,
-        rgba(255,255,255,0.012) 80px,
-        rgba(255,255,255,0.012) 81px
-      );
+      background: transparent;
       pointer-events: none;
     }
 
     #leistungen .section-inner { position: relative; z-index: 1; }
     #leistungen .section-eyebrow-line { background: var(--accent); }
-    #leistungen .section-eyebrow span { color: rgba(255,255,255,0.4); }
-    #leistungen .section-title { color: white; }
-    #leistungen .section-sub { color: rgba(255,255,255,0.55); }
+    #leistungen .section-eyebrow span { color: var(--muted); }
+    #leistungen .section-title { color: var(--text); }
+    #leistungen .section-sub { color: var(--muted); }
 
     .services-grid {
       display: grid;
@@ -640,18 +617,19 @@
     }
 
     .service-card {
-      background: rgba(255,255,255,0.04);
-      border: none;
-      border-top: 3px solid rgba(29,78,216,0.6);
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-top: 3px solid var(--accent);
       padding: 32px 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       transition: background 0.25s, border-top-color 0.25s, transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s;
     }
 
     .service-card:hover {
-      background: rgba(255,255,255,0.08);
-      border-top-color: var(--accent-light);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+      background: #f8f9fc;
+      border-top-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
     }
 
     .service-num {
@@ -660,6 +638,9 @@
       font-weight: 800;
       letter-spacing: 0.2em;
       color: var(--accent);
+      background: #EBF4FF;
+      display: inline-block;
+      padding: 2px 8px;
       margin-bottom: 16px;
     }
 
@@ -669,13 +650,13 @@
       font-weight: 800;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: white;
+      color: var(--text);
       margin-bottom: 12px;
     }
 
     .service-card p {
       font-size: 0.875rem;
-      color: rgba(255,255,255,0.6);
+      color: var(--muted);
       line-height: 1.75;
     }
 
@@ -683,8 +664,8 @@
       display: inline-flex;
       align-items: center;
       margin-top: 16px;
-      background: rgba(29,78,216,0.2);
-      color: var(--accent-light);
+      background: #EBF4FF;
+      color: var(--accent);
       font-family: var(--font-display);
       font-size: 0.68rem;
       font-weight: 700;
@@ -692,7 +673,7 @@
       text-transform: uppercase;
       padding: 4px 12px;
       border-radius: 2px;
-      border: 1px solid rgba(29,78,216,0.35);
+      border: 1px solid #bfdbfe;
     }
 
     /* ─── REGION ─── */
@@ -926,8 +907,8 @@
 
     /* ─── FOOTER ─── */
     footer {
-      background: #111111;
-      color: #7a7a7a;
+      background: #f1f5f9;
+      color: var(--text);
       padding: 56px 32px 36px;
     }
 
@@ -941,7 +922,7 @@
       grid-template-columns: 1.5fr 1fr 1fr;
       gap: 56px;
       padding-bottom: 44px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid #e2e8f0;
       margin-bottom: 32px;
     }
 
@@ -951,7 +932,7 @@
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: white;
+      color: var(--text);
       margin-bottom: 12px;
     }
 
@@ -959,21 +940,21 @@
       font-size: 0.85rem;
       line-height: 1.75;
       margin-bottom: 20px;
-      color: #5a5a5a;
+      color: #64748b;
     }
 
     .footer-contact-link {
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #5a5a5a;
+      color: #64748b;
       text-decoration: none;
       font-size: 0.85rem;
       margin-bottom: 8px;
       transition: color 0.2s;
     }
 
-    .footer-contact-link:hover { color: white; }
+    .footer-contact-link:hover { color: var(--accent); }
 
     .footer-col-title {
       font-family: var(--font-display);
@@ -981,10 +962,10 @@
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
+      color: var(--text);
       margin-bottom: 18px;
       padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid #e2e8f0;
     }
 
     .footer-col-links {
@@ -995,12 +976,12 @@
 
     .footer-col-links a {
       font-size: 0.85rem;
-      color: #5a5a5a;
+      color: #64748b;
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .footer-col-links a:hover { color: white; }
+    .footer-col-links a:hover { color: var(--accent); }
 
     .footer-bottom {
       display: flex;
@@ -1012,7 +993,7 @@
 
     .footer-copy {
       font-size: 0.78rem;
-      color: #4a4a4a;
+      color: #64748b;
     }
 
     .footer-legal { display: flex; gap: 24px; }
@@ -1021,11 +1002,11 @@
       font-size: 0.75rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #4a4a4a;
+      color: #64748b;
       text-decoration: none;
       transition: color 0.2s;
     }
-    .footer-legal a:hover { color: white; }
+    .footer-legal a:hover { color: var(--accent); }
 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
@@ -1131,14 +1112,14 @@
     /* ─── IMAGE PLACEHOLDER ─── */
     .img-placeholder {
       width: 100%;
-      background: #1a1a1a;
-      border: 2px dashed #2a2a2a;
+      background: var(--surface);
+      border: 2px dashed var(--border);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      color: #4a4a4a;
+      color: var(--muted);
       font-size: 0.8rem;
       font-weight: 500;
       letter-spacing: 0.04em;
@@ -1182,9 +1163,9 @@
       top: 72px;
       left: 0;
       right: 0;
-      background: #0e0e0e;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
       z-index: 99;
       padding: 16px 24px 24px;
       flex-direction: column;
@@ -1200,7 +1181,7 @@
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
+      color: #64748b;
       text-decoration: none;
       border-radius: 0;
       border-left: 2px solid transparent;
@@ -1208,9 +1189,9 @@
     }
 
     .mobile-menu a:hover {
-      background: rgba(255,255,255,0.05);
+      background: #f8f9fc;
       border-left-color: var(--accent);
-      color: white;
+      color: var(--accent);
     }
 
     .mobile-menu .mobile-cta {
@@ -1507,7 +1488,7 @@
           <div class="service-num">06</div>
           <h3>Bewertung von Leasingfahrzeugen</h3>
           <p>Sie müssen Ihr Leasingfahrzeug abgeben und fürchten Nachzahlungen aufgrund von Gebrauchsspuren bzw. Beschädigungen? Wir besichtigen das Fahrzeug, ermitteln den Wiederbeschaffungswert und dokumentieren den Zustand — so können Sie besser abschätzen, ob der im Leasingvertrag angestrebte Wert nach Vertragsablauf erreicht wurde.</p>
-          <p style="margin-top:10px; font-size:0.88rem; color:rgba(255,255,255,0.45);">Außerdem schützen Sie sich vor unberechtigten Forderungen des Leasinggebers. Bei Flottenrückgaben lohnt es sich besonders, für alle Fahrzeuge vorab Wertgutachten anfertigen zu lassen.</p>
+          <p style="margin-top:10px; font-size:0.88rem; color:#64748b;">Außerdem schützen Sie sich vor unberechtigten Forderungen des Leasinggebers. Bei Flottenrückgaben lohnt es sich besonders, für alle Fahrzeuge vorab Wertgutachten anfertigen zu lassen.</p>
           <span class="service-tag">Flottenabgabe möglich</span>
         </div>
         <div class="service-card">
