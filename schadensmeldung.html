@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Schadensmeldung | Sachverständigenbüro Acigöz Zekai</title>
+  <meta name="description" content="Melden Sie Ihren Fahrzeugschaden einfach und schnell online. Zekai Acigöz – KFZ-Sachverständiger im Ortenaukreis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --bg: #f8f8f6;
+      --surface: #ffffff;
+      --surface2: #f2f2ef;
+      --accent: #1d4ed8;
+      --accent-hover: #1e40af;
+      --text: #111111;
+      --muted: #6b7280;
+      --border: #e2e2dc;
+      --radius: 2px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(248,248,246,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 32px;
+      height: 68px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-logo-name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--text); letter-spacing: 0.02em; text-transform: uppercase; }
+    .nav-logo-sub { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.05em; }
+    .nav-back {
+      display: flex; align-items: center; gap: 6px;
+      color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+
+    /* HERO BANNER */
+    .page-hero {
+      background: #0e0e0e;
+      padding: 140px 32px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute; top: 0; right: -10%; bottom: 0; width: 55%;
+      background: linear-gradient(135deg, transparent 40%, rgba(29,78,216,0.08) 100%);
+      transform: skewX(-6deg);
+      pointer-events: none;
+    }
+    .page-hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
+    }
+    .page-eyebrow-line { width: 32px; height: 2px; background: var(--accent); }
+    .page-hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900; text-transform: uppercase; letter-spacing: 0.02em;
+      color: #ffffff; line-height: 1.05; margin-bottom: 16px;
+    }
+    .page-hero p {
+      color: rgba(255,255,255,0.55); font-size: 1rem; max-width: 560px; line-height: 1.7;
+    }
+
+    /* MAIN */
+    main { max-width: 1100px; margin: 0 auto; padding: 64px 32px 100px; }
+
+    /* STEPS INDICATOR */
+    .steps {
+      display: flex; align-items: center; gap: 0;
+      margin-bottom: 48px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .step {
+      flex: 1; padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+      cursor: pointer; transition: background 0.2s;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .step:last-child { border-right: none; }
+    .step.active { background: var(--accent); }
+    .step.done { background: #f0f4ff; }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 800; font-size: 0.85rem;
+      background: rgba(0,0,0,0.08); color: var(--muted); flex-shrink: 0;
+      transition: background 0.2s, color 0.2s;
+    }
+    .step.active .step-num { background: rgba(255,255,255,0.2); color: #fff; }
+    .step.done .step-num { background: var(--accent); color: #fff; }
+    .step-label {
+      font-family: var(--font-display); font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);
+      transition: color 0.2s;
+    }
+    .step.active .step-label { color: #fff; }
+    .step.done .step-label { color: var(--accent); }
+
+    /* FORM PANELS */
+    .form-panel { display: none; }
+    .form-panel.active { display: block; animation: fadeUp 0.35s ease both; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-title {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .panel-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 32px; }
+
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .form-card-title {
+      font-family: var(--font-display); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 20px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .form-row-zip { display: grid; grid-template-columns: 120px 1fr; gap: 16px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group:last-child { margin-bottom: 0; }
+
+    label {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    label .required { color: var(--accent); margin-left: 2px; }
+
+    input[type="text"], input[type="email"], input[type="tel"],
+    input[type="date"], input[type="number"], select, textarea {
+      font-family: var(--font-body); font-size: 0.9rem;
+      padding: 11px 14px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none; width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
+    }
+    textarea { resize: vertical; min-height: 100px; }
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    /* DAMAGE TYPE RADIO CARDS */
+    .damage-types {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px;
+      margin-bottom: 0;
+    }
+    .damage-type-label {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 16px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+      cursor: pointer; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      text-align: center;
+    }
+    .damage-type-label:hover { border-color: var(--accent); background: #f0f4ff; }
+    .damage-type-label input { position: absolute; opacity: 0; pointer-events: none; }
+    .damage-type-label.selected {
+      border-color: var(--accent); background: #eff6ff;
+      box-shadow: 0 0 0 2px rgba(29,78,216,0.2);
+    }
+    .damage-type-icon { font-size: 1.6rem; line-height: 1; }
+    .damage-type-text { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+    .damage-type-label.selected .damage-type-text { color: var(--accent); }
+
+    /* FILE UPLOAD */
+    .file-upload-area {
+      border: 2px dashed var(--border); border-radius: var(--radius);
+      padding: 40px 20px; text-align: center; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--bg);
+    }
+    .file-upload-area:hover, .file-upload-area.drag-over {
+      border-color: var(--accent); background: #f0f4ff;
+    }
+    .file-upload-area input { display: none; }
+    .file-upload-icon { font-size: 2rem; margin-bottom: 10px; }
+    .file-upload-text { font-size: 0.9rem; color: var(--muted); }
+    .file-upload-text strong { color: var(--accent); cursor: pointer; }
+    .file-upload-hint { font-size: 0.75rem; color: var(--muted); margin-top: 6px; }
+    .file-list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .file-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; background: var(--surface2); border-radius: var(--radius);
+      font-size: 0.82rem;
+    }
+    .file-item-name { color: var(--text); font-weight: 500; }
+    .file-item-size { color: var(--muted); font-size: 0.75rem; }
+    .file-item-remove { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 1rem; padding: 0 4px; line-height: 1; }
+    .file-item-remove:hover { color: #dc2626; }
+
+    /* NAVIGATION BUTTONS */
+    .form-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border);
+    }
+    .btn-prev {
+      padding: 12px 28px;
+      background: none; border: 1px solid var(--border);
+      border-radius: var(--radius); color: var(--muted);
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-prev:hover { border-color: var(--text); color: var(--text); }
+    .btn-next, .btn-submit {
+      padding: 13px 36px;
+      background: var(--accent); border: none; border-radius: var(--radius);
+      color: #fff; font-family: var(--font-display); font-size: 0.9rem;
+      font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(29,78,216,0.3);
+    }
+    .btn-next:hover, .btn-submit:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 6px 24px rgba(29,78,216,0.4);
+    }
+    .step-counter { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+
+    /* SUCCESS */
+    .success-screen {
+      display: none; text-align: center; padding: 80px 32px;
+    }
+    .success-screen.visible { display: block; animation: fadeUp 0.4s ease both; }
+    .success-icon { font-size: 4rem; margin-bottom: 20px; }
+    .success-title {
+      font-family: var(--font-display); font-size: 2.5rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 12px;
+    }
+    .success-text { color: var(--muted); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+    .success-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 32px; background: var(--accent); border-radius: var(--radius);
+      color: #fff; text-decoration: none;
+      font-family: var(--font-display); font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .success-back:hover { background: var(--accent-hover); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 32px; text-align: center;
+      font-size: 0.8rem; color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 12px; }
+    footer a:hover { color: var(--text); }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .nav-inner { padding: 0 20px; }
+      .page-hero { padding: 120px 20px 60px; }
+      main { padding: 40px 20px 80px; }
+      .form-card { padding: 20px; }
+      .form-row, .form-row-3, .form-row-zip { grid-template-columns: 1fr; }
+      .steps { flex-direction: column; }
+      .step { border-right: none; border-bottom: 1px solid var(--border); }
+      .step:last-child { border-bottom: none; }
+      .damage-types { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.svg" alt="ZA Logo" />
+        <div>
+          <div class="nav-logo-name">Zekai Acigöz</div>
+          <div class="nav-logo-sub">KFZ-Sachverständiger</div>
+        </div>
+      </a>
+      <a href="index.html" class="nav-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Zurück zur Startseite
+      </a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-eyebrow">
+        <div class="page-eyebrow-line"></div>
+        <span>Schnell & unkompliziert</span>
+      </div>
+      <h1>Online Schadensmeldung</h1>
+      <p>Teilen Sie uns Ihren Fahrzeugschaden bequem online mit. Wir melden uns umgehend bei Ihnen und organisieren die weitere Vorgehensweise.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- STEPS -->
+    <div class="steps" id="steps">
+      <div class="step active" data-step="1">
+        <div class="step-num">1</div>
+        <div class="step-label">Ihre Daten</div>
+      </div>
+      <div class="step" data-step="2">
+        <div class="step-num">2</div>
+        <div class="step-label">Fahrzeug</div>
+      </div>
+      <div class="step" data-step="3">
+        <div class="step-num">3</div>
+        <div class="step-label">Schaden</div>
+      </div>
+      <div class="step" data-step="4">
+        <div class="step-num">4</div>
+        <div class="step-label">Fotos & Senden</div>
+      </div>
+    </div>
+
+    <form id="schadenForm" novalidate>
+
+      <!-- PANEL 1: Persönliche Daten -->
+      <div class="form-panel active" id="panel-1">
+        <div class="panel-title">Ihre Kontaktdaten</div>
+        <div class="panel-desc">Damit wir Sie schnellstmöglich erreichen können.</div>
+
+        <div class="form-card">
+          <div class="form-card-title">Persönliche Angaben</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Vorname <span class="required">*</span></label>
+              <input type="text" name="vorname" placeholder="Max" required />
+            </div>
+            <div class="form-group">
+              <label>Nachname <span class="required">*</span></label>
+              <input type="text" name="nachname" placeholder="Mustermann" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Telefon <span class="required">*</span></label>
+              <input type="tel" name="telefon" placeholder="0170 0000000" required />
+            </div>
+            <div class="form-group">
+              <label>E-Mail <span class="required">*</span></label>
+              <input type="email" name="email" placeholder="max@beispiel.de" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-title">Adresse</div>
+          <div class="form-group">
+            <label>Straße und Hausnummer</label>
+            <input type="text" name="strasse" placeholder="Musterstraße 1" />
+          </div>
+          <div class="form-row-zip">
+            <div class="form-group">
+              <label>PLZ</label>
+              <input type="text" name="plz" placeholder="77948" maxlength="5" />
+            </div>
+            <div class="form-group">
+              <label>Ort</label>
+              <input type="text" name="ort" placeholder="Friesenheim" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <div></div>
+          <div style="display:flex; align-items:center; gap:20px;">
+            <span class="step-counter">Schritt 1 von 4</span>
+            <button type="button" class="btn-next" onclick="goToStep(2)">Weiter →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: Fahrzeugdaten -->
+      <div class="form-panel" id="panel-2">
+        <div class="panel-title">Fahrzeugdaten</div>
+        <div class="panel-desc">Angaben zu Ihrem betroffenen Fahrzeug.</div>
+
+        <div class="form-card">
+          <div class="form-card-title">Fahrzeugidentifikation</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Kennzeichen <span class="required">*</span></label>
+              <input type="text" name="kennzeichen" placeholder="OG-XX 1234" required style="text-transform:uppercase;" />
+            </div>
+            <div class="form-group">
+              <label>FIN (optional)</label>
+              <input type="text" name="fin" placeholder="WDB1234567..." />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Hersteller <span class="required">*</span></label>
+              <input type="text" name="hersteller" placeholder="z.B. BMW, Mercedes, VW" required />
+            </div>
+            <div class="form-group">
+              <label>Modell <span class="required">*</span></label>
+              <input type="text" name="modell" placeholder="z.B. 3er, C-Klasse, Golf" required />
+            </div>
+          </div>
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Erstzulassung</label>
+              <input type="text" name="erstzulassung" placeholder="MM/JJJJ" />
+            </div>
+            <div class="form-group">
+              <label>Kilometerstand</label>
+              <input type="number" name="km" placeholder="80000" min="0" />
+            </div>
+            <div class="form-group">
+              <label>Farbe</label>
+              <input type="text" name="farbe" placeholder="z.B. Schwarz" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-title">Versicherung</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Eigene Versicherung</label>
+              <input type="text" name="versicherung_eigen" placeholder="z.B. HUK-Coburg" />
+            </div>
+            <div class="form-group">
+              <label>Versicherung Unfallgegner</label>
+              <input type="text" name="versicherung_gegner" placeholder="z.B. Allianz" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Schadennummer (falls vorhanden)</label>
+            <input type="text" name="schadennummer" placeholder="z.B. 12-345-678901" />
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <button type="button" class="btn-prev" onclick="goToStep(1)">← Zurück</button>
+          <div style="display:flex; align-items:center; gap:20px;">
+            <span class="step-counter">Schritt 2 von 4</span>
+            <button type="button" class="btn-next" onclick="goToStep(3)">Weiter →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 3: Schadenangaben -->
+      <div class="form-panel" id="panel-3">
+        <div class="panel-title">Schadenangaben</div>
+        <div class="panel-desc">Beschreiben Sie den entstandenen Schaden so genau wie möglich.</div>
+
+        <div class="form-card">
+          <div class="form-card-title">Art des Schadens</div>
+          <div class="damage-types">
+            <label class="damage-type-label" onclick="selectDamage(this)">
+              <input type="radio" name="schadenart" value="Unfallschaden" />
+              <div class="damage-type-icon">💥</div>
+              <div class="damage-type-text">Unfall&shy;schaden</div>
+            </label>
+            <label class="damage-type-label" onclick="selectDamage(this)">
+              <input type="radio" name="schadenart" value="Hagelschaden" />
+              <div class="damage-type-icon">🌩️</div>
+              <div class="damage-type-text">Hagel&shy;schaden</div>
+            </label>
+            <label class="damage-type-label" onclick="selectDamage(this)">
+              <input type="radio" name="schadenart" value="Vandalismusschaden" />
+              <div class="damage-type-icon">🔑</div>
+              <div class="damage-type-text">Vandalis&shy;mus</div>
+            </label>
+            <label class="damage-type-label" onclick="selectDamage(this)">
+              <input type="radio" name="schadenart" value="Glasschaden" />
+              <div class="damage-type-icon">🪟</div>
+              <div class="damage-type-text">Glas&shy;schaden</div>
+            </label>
+            <label class="damage-type-label" onclick="selectDamage(this)">
+              <input type="radio" name="schadenart" value="Wildunfall" />
+              <div class="damage-type-icon">🦌</div>
+              <div class="damage-type-text">Wild&shy;unfall</div>
+            </label>
+            <label class="damage-type-label" onclick="selectDamage(this)">
+              <input type="radio" name="schadenart" value="Leasingrückgabe" />
+              <div class="damage-type-icon">📋</div>
+              <div class="damage-type-text">Leasing&shy;rückgabe</div>
+            </label>
+            <label class="damage-type-label" onclick="selectDamage(this)">
+              <input type="radio" name="schadenart" value="Wertermittlung" />
+              <div class="damage-type-icon">📊</div>
+              <div class="damage-type-text">Wert&shy;ermittlung</div>
+            </label>
+            <label class="damage-type-label" onclick="selectDamage(this)">
+              <input type="radio" name="schadenart" value="Sonstiges" />
+              <div class="damage-type-icon">❓</div>
+              <div class="damage-type-text">Sonstiges</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-title">Schadendetails</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Schadendatum <span class="required">*</span></label>
+              <input type="date" name="schadendatum" required />
+            </div>
+            <div class="form-group">
+              <label>Schadenort</label>
+              <input type="text" name="schadenort" placeholder="z.B. Offenburg, B33" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Beschreibung des Schadens <span class="required">*</span></label>
+            <textarea name="beschreibung" rows="5" placeholder="Bitte beschreiben Sie den Hergang und die sichtbaren Schäden so genau wie möglich …" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Betroffene Fahrzeugteile</label>
+            <input type="text" name="teile" placeholder="z.B. Frontstoßstange, Motorhaube, rechter Kotflügel" />
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <button type="button" class="btn-prev" onclick="goToStep(2)">← Zurück</button>
+          <div style="display:flex; align-items:center; gap:20px;">
+            <span class="step-counter">Schritt 3 von 4</span>
+            <button type="button" class="btn-next" onclick="goToStep(4)">Weiter →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 4: Fotos & Absenden -->
+      <div class="form-panel" id="panel-4">
+        <div class="panel-title">Fotos & Absenden</div>
+        <div class="panel-desc">Laden Sie Fotos des Schadens hoch und senden Sie die Meldung ab.</div>
+
+        <div class="form-card">
+          <div class="form-card-title">Schadensfotos (empfohlen)</div>
+          <div class="file-upload-area" id="dropZone" onclick="document.getElementById('fileInput').click()">
+            <input type="file" id="fileInput" name="fotos" multiple accept="image/*,.pdf" onchange="handleFiles(this.files)" />
+            <div class="file-upload-icon">📷</div>
+            <div class="file-upload-text">
+              <strong>Fotos auswählen</strong> oder hier ablegen
+            </div>
+            <div class="file-upload-hint">JPG, PNG, HEIC, PDF · Max. 10 MB pro Datei · Bis zu 15 Dateien</div>
+          </div>
+          <div class="file-list" id="fileList"></div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-title">Weitere Anmerkungen</div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Zusätzliche Hinweise (optional)</label>
+            <textarea name="hinweise" rows="3" placeholder="Haben Sie weitere Informationen, die für uns wichtig sein könnten?"></textarea>
+          </div>
+        </div>
+
+        <div class="form-card" style="background:#f0f4ff; border-color:rgba(29,78,216,0.2);">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="font-size:1.2rem; margin-top:2px;">ℹ️</div>
+            <div>
+              <div style="font-weight:600; font-size:0.88rem; margin-bottom:4px;">So geht es weiter</div>
+              <div style="font-size:0.85rem; color:var(--muted); line-height:1.6;">
+                Nach Absenden Ihrer Meldung melden wir uns in der Regel <strong>innerhalb von 2 Stunden</strong> telefonisch oder per E-Mail bei Ihnen. Wir besprechen den weiteren Ablauf und vereinbaren einen zeitnahen Besichtigungstermin.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <label style="display:flex; gap:10px; align-items:flex-start; cursor:pointer; text-transform:none; font-size:0.85rem; letter-spacing:0; font-weight:400; color:var(--muted);">
+            <input type="checkbox" name="datenschutz" required style="width:16px; height:16px; margin-top:2px; flex-shrink:0;" />
+            <span>Ich habe die <a href="datenschutz.html" target="_blank" style="color:var(--accent);">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung meiner Schadensmeldung einverstanden. <span class="required">*</span></span>
+          </label>
+        </div>
+
+        <div class="form-nav">
+          <button type="button" class="btn-prev" onclick="goToStep(3)">← Zurück</button>
+          <div style="display:flex; align-items:center; gap:20px;">
+            <span class="step-counter">Schritt 4 von 4</span>
+            <button type="submit" class="btn-submit">Jetzt absenden ✓</button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✅</div>
+      <div class="success-title">Schadensmeldung eingegangen</div>
+      <p class="success-text">Vielen Dank! Ihre Schadensmeldung wurde erfolgreich übermittelt. Wir melden uns in der Regel innerhalb von 2 Stunden bei Ihnen zurück.</p>
+      <a href="index.html" class="success-back">← Zurück zur Startseite</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <a href="index.html">Startseite</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="agb.html">AGB</a>
+    <p style="margin-top:12px;">© 2026 Sachverständigenbüro Acigöz Zekai</p>
+  </footer>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    function goToStep(step) {
+      // Validate required fields in current step before moving forward
+      if (step > currentStep) {
+        const panel = document.getElementById('panel-' + currentStep);
+        const required = panel.querySelectorAll('[required]');
+        let valid = true;
+        required.forEach(el => {
+          el.style.borderColor = '';
+          if (!el.value.trim()) {
+            el.style.borderColor = '#dc2626';
+            el.style.boxShadow = '0 0 0 3px rgba(220,38,38,0.15)';
+            valid = false;
+          }
+        });
+        if (!valid) {
+          const first = panel.querySelector('[required]:not([value])') || panel.querySelector('[required]');
+          if (first) first.focus();
+          return;
+        }
+      }
+
+      // Update panels
+      document.getElementById('panel-' + currentStep).classList.remove('active');
+      document.getElementById('panel-' + step).classList.add('active');
+
+      // Update step indicators
+      document.querySelectorAll('.step').forEach(s => {
+        const n = parseInt(s.dataset.step);
+        s.classList.remove('active', 'done');
+        if (n === step) s.classList.add('active');
+        else if (n < step) s.classList.add('done');
+      });
+
+      currentStep = step;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function selectDamage(label) {
+      document.querySelectorAll('.damage-type-label').forEach(l => l.classList.remove('selected'));
+      label.classList.add('selected');
+    }
+
+    // File upload
+    let selectedFiles = [];
+
+    function handleFiles(files) {
+      Array.from(files).forEach(f => {
+        if (!selectedFiles.find(x => x.name === f.name)) selectedFiles.push(f);
+      });
+      renderFileList();
+    }
+
+    function renderFileList() {
+      const list = document.getElementById('fileList');
+      list.innerHTML = selectedFiles.map((f, i) => `
+        <div class="file-item">
+          <div>
+            <div class="file-item-name">📎 ${f.name}</div>
+            <div class="file-item-size">${(f.size / 1024 / 1024).toFixed(2)} MB</div>
+          </div>
+          <button class="file-item-remove" type="button" onclick="removeFile(${i})">✕</button>
+        </div>
+      `).join('');
+    }
+
+    function removeFile(i) {
+      selectedFiles.splice(i, 1);
+      renderFileList();
+    }
+
+    // Drag & drop
+    const dropZone = document.getElementById('dropZone');
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      handleFiles(e.dataTransfer.files);
+    });
+
+    // Form submit
+    document.getElementById('schadenForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const datenschutz = this.querySelector('[name="datenschutz"]');
+      if (!datenschutz.checked) {
+        datenschutz.style.outline = '2px solid #dc2626';
+        return;
+      }
+      // Show success (in production: send via Formspree / fetch)
+      document.getElementById('schadenForm').style.display = 'none';
+      document.getElementById('steps').style.display = 'none';
+      document.getElementById('successScreen').classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Nav shadow on scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Reset field error styling on input
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+      el.addEventListener('input', () => {
+        el.style.borderColor = '';
+        el.style.boxShadow = '';
+      });
+    });
+  </script>
+
+</body>
+</html>
