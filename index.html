@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KFZ-Sachverständigenbüro Lauer | Offenburg</title>
+  <meta name="description" content="Unabhängige KFZ-Gutachten in Offenburg, Lahr/Schwarzwald und Umgebung. Unfall-, Schaden-, Wert- und Oldtimergutachten." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --border: #2a2f45;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(15, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--accent-hover) !important; color: #fff !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.25);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, transform 0.1s;
+    }
+
+    .btn-ghost:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+
+    .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+
+    /* SECTIONS */
+    section { padding: 96px 24px; }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 56px;
+    }
+
+    /* SERVICES */
+    #leistungen { background: var(--surface); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(59,130,246,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .service-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    .free-badge {
+      display: inline-block;
+      margin-top: 12px;
+      background: rgba(59,130,246,0.15);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 16px;
+      line-height: 1.75;
+    }
+
+    .about-features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 20px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .feature-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .feature h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .feature p { font-size: 0.85rem; color: var(--muted); }
+
+    /* REGION */
+    #region { background: var(--surface); }
+
+    .region-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .region-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .region-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .region-card span { font-size: 0.95rem; font-weight: 500; }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 20px; }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .contact-item:hover { border-color: var(--accent); }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(59,130,246,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 3px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .contact-value { font-size: 1rem; font-weight: 600; }
+
+    .contact-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+    }
+
+    .contact-form h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 24px; }
+
+    .form-group { margin-bottom: 18px; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--accent); }
+
+    .form-group select option { background: var(--bg); }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+
+    .form-submit:hover { background: var(--accent-hover); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      background: var(--bg);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .footer-logo span { color: var(--accent); }
+
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy { font-size: 0.8rem; color: var(--muted); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+
+      .about-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+
+      .hero-stats { gap: 32px; }
+
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">KFZ<span>.</span>Lauer</a>
+      <ul class="nav-links">
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#ueber-uns">Über uns</a></li>
+        <li><a href="#region">Region</a></li>
+        <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">✦ Unabhängige KFZ-Gutachten</div>
+      <h1>Ihr Sachverständiger.<br /><span>Einfach Gutachten.</span></h1>
+      <p>Professionelle und unabhängige KFZ-Gutachten in Offenburg und Umgebung — schnell, zuverlässig und transparent.</p>
+      <div class="hero-actions">
+        <a href="#kontakt" class="btn-primary">Jetzt Kontakt aufnehmen</a>
+        <a href="#leistungen" class="btn-ghost">Leistungen ansehen</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Unabhängig & neutral</div>
+        </div>
+        <div>
+          <div class="stat-value">Kostenlos</div>
+          <div class="stat-label">Ersteinschätzung</div>
+        </div>
+        <div>
+          <div class="stat-value">Vor Ort</div>
+          <div class="stat-label">Service in der Region</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section id="leistungen">
+    <div class="section-inner">
+      <div class="section-tag">Leistungen</div>
+      <h2 class="section-title">Was wir für Sie tun</h2>
+      <p class="section-sub">Von der Ersteinschätzung bis zum gerichtsfesten Gutachten — wir begleiten Sie kompetent durch jeden Schritt.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🚗</div>
+          <h3>Unfallgutachten</h3>
+          <p>Nach einem Verkehrsunfall ermitteln wir den genauen Schaden und dokumentieren ihn rechtssicher für Versicherung und Gericht.</p>
+          <span class="free-badge">Kostenlose Ersteinschätzung</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔍</div>
+          <h3>Schadengutachten</h3>
+          <p>Detaillierte Schadenanalyse und -bewertung — nachvollziehbar, präzise und unabhängig von Versicherungsinteressen.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>Wertgutachten</h3>
+          <p>Objektive Fahrzeugbewertung für Kauf, Verkauf, Erbschaft oder Finanzierungszwecke – zum aktuellen Marktwert.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🏆</div>
+          <h3>Oldtimergutachten</h3>
+          <p>Spezialisierte Bewertung und Dokumentation von Oldtimern und Youngtimern – für Versicherung, Verkauf oder Liebhaber.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⚖️</div>
+          <h3>Gerichtsgutachten</h3>
+          <p>Gerichtsverwertbare Sachverständigengutachten, die vor Gericht standhalten und als Beweismittel anerkannt werden.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💬</div>
+          <h3>Kostenlose Beratung</h3>
+          <p>Unverbindliche Ersteinschätzung Ihres Schadens – persönlich, telefonisch oder vor Ort. Ohne Risiko, ohne Kosten.</p>
+          <span class="free-badge">Gratis & unverbindlich</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÜBER UNS -->
+  <section id="ueber-uns">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="section-tag">Über uns</div>
+          <h2 class="section-title">Kompetenz, der Sie vertrauen können</h2>
+          <p>Das KFZ-Sachverständigenbüro Lauer steht für unabhängige, präzise und rechtssichere Gutachten. Als anerkannter Sachverständiger sind wir Ihr kompetenter Partner rund um das Thema Fahrzeugbewertung und Schadenanalyse.</p>
+          <p>Wir arbeiten unabhängig von Versicherungen und Werkstätten – Ihr Interesse steht bei uns immer an erster Stelle. Schnell, transparent und persönlich.</p>
+        </div>
+        <div class="about-features">
+          <div class="feature">
+            <div class="feature-icon">🛡️</div>
+            <div>
+              <h4>Vollständig unabhängig</h4>
+              <p>Keine Bindung an Versicherungen oder Werkstätten. Ihre Interessen zählen.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <div>
+              <h4>Schnelle Bearbeitung</h4>
+              <p>Wir wissen, dass Ihre Zeit wertvoll ist. Kurzfristige Termine möglich.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">📍</div>
+            <div>
+              <h4>Vor-Ort-Service</h4>
+              <p>Wir kommen zu Ihnen – in Offenburg, Lahr und der gesamten Region.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">📋</div>
+            <div>
+              <h4>Rechtssichere Gutachten</h4>
+              <p>Unsere Gutachten erfüllen alle Anforderungen für Versicherungen und Gerichte.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGION -->
+  <section id="region">
+    <div class="section-inner">
+      <div class="section-tag">Einsatzgebiet</div>
+      <h2 class="section-title">Unsere Region</h2>
+      <p class="section-sub">Wir sind für Sie in Offenburg, Lahr/Schwarzwald und der gesamten Umgebung vor Ort erreichbar.</p>
+      <div class="region-cards">
+        <div class="region-card"><div class="region-dot"></div><span>Offenburg</span></div>
+        <div class="region-card"><div class="region-dot"></div><span>Lahr/Schwarzwald</span></div>
+        <div class="region-card"><div class="region-dot"></div><span>Ortenaukreis</span></div>
+        <div class="region-card"><div class="region-dot"></div><span>Kehl</span></div>
+        <div class="region-card"><div class="region-dot"></div><span>Achern</span></div>
+        <div class="region-card"><div class="region-dot"></div><span>Wolfach</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt">
+    <div class="section-inner">
+      <div class="section-tag">Kontakt</div>
+      <h2 class="section-title">Sprechen Sie uns an</h2>
+      <p class="section-sub">Kostenlose Ersteinschätzung – wir melden uns schnellstmöglich bei Ihnen zurück.</p>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <a href="tel:078171141" class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label">Telefon</div>
+              <div class="contact-value">0781 71141</div>
+            </div>
+          </a>
+          <a href="tel:017670177087" class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+              <div class="contact-label">Mobil</div>
+              <div class="contact-value">0176 70177087</div>
+            </div>
+          </a>
+          <a href="mailto:info@svlauer.de" class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">E-Mail</div>
+              <div class="contact-value">info@svlauer.de</div>
+            </div>
+          </a>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-label">Adresse</div>
+              <div class="contact-value">Freiburger Straße 16<br />77652 Offenburg</div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Nachricht senden</h3>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Ihr Name" />
+          </div>
+          <div class="form-group">
+            <label>E-Mail oder Telefon</label>
+            <input type="text" placeholder="Wie können wir Sie erreichen?" />
+          </div>
+          <div class="form-group">
+            <label>Anliegen</label>
+            <select>
+              <option value="">Bitte wählen …</option>
+              <option>Unfallgutachten</option>
+              <option>Schadengutachten</option>
+              <option>Wertgutachten</option>
+              <option>Oldtimergutachten</option>
+              <option>Gerichtsgutachten</option>
+              <option>Kostenlose Ersteinschätzung</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Nachricht</label>
+            <textarea placeholder="Beschreiben Sie kurz Ihr Anliegen …"></textarea>
+          </div>
+          <button class="form-submit">Nachricht senden</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">KFZ<span>.</span>Lauer</div>
+      <div class="footer-links">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#ueber-uns">Über uns</a>
+        <a href="#region">Region</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+      <div class="footer-copy">© 2026 KFZ-Sachverständigenbüro Lauer, Offenburg</div>
+    </div>
+  </footer>
+
+</body>
+</html>
