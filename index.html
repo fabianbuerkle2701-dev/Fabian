@@ -105,11 +105,19 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 40px;
+      gap: 0;
       list-style: none;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
+      background: #f1f5f9;
+      border-radius: 9999px;
+      padding: 4px;
+    }
+
+    .nav-links li {
+      position: relative;
+      z-index: 1;
     }
 
     .nav-links a {
@@ -118,10 +126,31 @@
       text-decoration: none;
       font-size: 0.88rem;
       font-weight: 500;
+      padding: 7px 18px;
+      display: block;
+      border-radius: 9999px;
       transition: color 0.2s;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
     }
 
     .nav-links a:hover { color: #1d4ed8; }
+
+    /* Sliding pill cursor */
+    .nav-cursor {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      height: calc(100% - 8px);
+      background: #ffffff;
+      border-radius: 9999px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+      pointer-events: none;
+      transition: left 0.22s cubic-bezier(.4,0,.2,1), width 0.22s cubic-bezier(.4,0,.2,1), opacity 0.18s;
+      opacity: 0;
+      z-index: 0;
+    }
 
     .nav-cta {
       background: #1d4ed8;
@@ -1201,7 +1230,8 @@
           <span class="nav-logo-sub" style="font-size:0.75rem; letter-spacing:0.1em;">KFZ-Sachverständiger</span>
         </div>
       </a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
+        <div class="nav-cursor" id="navCursor"></div>
         <li><a href="#ueber-uns">Über mich</a></li>
         <li><a href="#leistungen">Leistungen</a></li>
         <li><a href="#region">Einsatzgebiet</a></li>
@@ -1580,6 +1610,25 @@
     window.addEventListener('scroll', () => {
       navEl.classList.toggle('scrolled', window.scrollY > 10);
     }, { passive: true });
+
+    // Sliding pill nav cursor
+    const navLinks = document.getElementById('navLinks');
+    const navCursor = document.getElementById('navCursor');
+    if (navLinks && navCursor) {
+      const items = navLinks.querySelectorAll('li');
+      items.forEach(li => {
+        li.addEventListener('mouseenter', () => {
+          const rect = li.getBoundingClientRect();
+          const parentRect = navLinks.getBoundingClientRect();
+          navCursor.style.opacity = '1';
+          navCursor.style.width = rect.width + 'px';
+          navCursor.style.left = (rect.left - parentRect.left) + 'px';
+        });
+      });
+      navLinks.addEventListener('mouseleave', () => {
+        navCursor.style.opacity = '0';
+      });
+    }
   </script>
 </body>
 </html>
