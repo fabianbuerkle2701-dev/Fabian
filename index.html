@@ -1127,11 +1127,20 @@
       setTimeout(()=>{ brand.classList.add('show'); }, 1000);
 
       function endIntro(){
-        // Fade out the intro (video inside fades with it)
+        // Capture last frame and apply it 1:1 as hero background
+        const canvas = document.createElement('canvas');
+        canvas.width  = video.videoWidth  || window.innerWidth;
+        canvas.height = video.videoHeight || window.innerHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        const dataURL = canvas.toDataURL('image/jpeg', 0.92);
+
+        // Hero background becomes the exact last frame → seamless transition
+        const hero = document.getElementById('hero');
+        hero.style.backgroundImage = `linear-gradient(to bottom, rgba(22,16,10,.72) 0%, rgba(22,16,10,.42) 40%, rgba(22,16,10,.82) 100%), url('${dataURL}')`;
+
+        // Fade out the intro (video fades with it)
         intro.classList.add('out');
-        // Page content begins to appear mid-fade
         setTimeout(()=>{ document.body.classList.add('page-revealed'); }, 600);
-        // Remove from DOM after fade completes
         setTimeout(()=>{ intro.remove(); }, 3100);
       }
 
