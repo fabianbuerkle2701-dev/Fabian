@@ -1132,7 +1132,8 @@
       setTimeout(()=>{ brand.classList.add('show'); }, 1000);
 
       function endIntro(){
-        // Lift video out of intro — make it the fixed hero background
+        // Freeze on last frame, then lift out of intro as fixed hero background
+        video.pause();
         video.id = 'hero-video-bg';
         video.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;transition:opacity 1.5s ease';
         document.body.insertBefore(video, document.body.firstChild);
