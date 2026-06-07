@@ -1132,12 +1132,11 @@
         setTimeout(()=>{ intro.remove(); }, 3100);
       }
 
-      // When video ends → slide intro away
+      // When video ends → fade intro away
       video.addEventListener('ended', endIntro);
 
-      // Fallback: if video fails to load or play, skip after 6s
+      // Fallback only if video errors out
       video.addEventListener('error', ()=>{ setTimeout(endIntro, 500); });
-      setTimeout(()=>{ if(document.getElementById('intro')) endIntro(); }, 12000);
     })();
 
     // ── NAV pill cursor
