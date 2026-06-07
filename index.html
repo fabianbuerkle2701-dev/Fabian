@@ -10,23 +10,95 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── INTRO ── */
-    #intro{position:fixed;inset:0;z-index:9999;background:#0C0804;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
-    #intro.closing{animation:introOut 1.4s cubic-bezier(.77,0,.18,1) forwards}
-    @keyframes introOut{to{transform:translateY(-100%)}}
-    #scene-svg{width:100%;max-width:960px;height:auto}
-    #intro-label{position:absolute;bottom:8%;text-align:center;opacity:0;transition:opacity 1s}
-    #intro-label.show{opacity:1}
-    #intro-label h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:400;color:#fff;letter-spacing:.05em}
-    #intro-label p{font-family:'DM Sans',sans-serif;font-size:clamp(.65rem,1.5vw,.85rem);letter-spacing:.22em;text-transform:uppercase;color:#B8842A;margin-top:6px}
-    .flame{transform-origin:50% 100%;animation:flicker .28s ease-in-out infinite alternate}
-    .flame:nth-child(2){animation-delay:.09s;animation-duration:.22s}
-    .flame:nth-child(3){animation-delay:.18s;animation-duration:.32s}
-    @keyframes flicker{from{transform:scaleY(1) skewX(0deg);opacity:.85}to{transform:scaleY(1.12) skewX(4deg);opacity:1}}
-    .smk{animation:smokeUp 2.4s ease-out infinite;opacity:0}
-    .smk:nth-child(2){animation-delay:.9s}.smk:nth-child(3){animation-delay:1.8s}
-    @keyframes smokeUp{0%{transform:translateY(0) scale(1);opacity:0}25%{opacity:.45}100%{transform:translateY(-72px) scale(3.5);opacity:0}}
-    /* ── END INTRO ── */
+    /* ══ INTRO ══ */
+    #intro{position:fixed;inset:0;z-index:9999;overflow:hidden;background:#0A0500;display:flex;align-items:center;justify-content:center}
+    #intro.out{animation:introSlide 1.1s cubic-bezier(.77,0,.18,1) forwards}
+    @keyframes introSlide{to{transform:translateY(-100%)}}
+
+    /* Oven interior atmosphere */
+    #oven-atm{
+      position:absolute;inset:0;
+      background:radial-gradient(ellipse 70% 55% at 50% 38%, #FF8000 0%, #C43A00 22%, #7A1800 45%, #2A0800 68%, #0A0500 100%);
+      opacity:0;transition:opacity .4s;
+    }
+    #oven-atm.on{opacity:1}
+    /* Stone arch overlay */
+    #oven-arch{
+      position:absolute;inset:0;pointer-events:none;
+      background:
+        radial-gradient(ellipse 90% 80% at 50% 110%, #0A0500 0%, transparent 55%),
+        radial-gradient(ellipse 40% 48% at 50% 34%, transparent 60%, rgba(10,5,0,.85) 100%);
+    }
+    /* Stone texture vignette */
+    #oven-vignette{
+      position:absolute;inset:0;pointer-events:none;
+      box-shadow:inset 0 0 120px 60px #0A0500;
+      border-radius:0;
+    }
+    /* Arch stone border */
+    #arch-border{
+      position:absolute;top:0;left:50%;transform:translateX(-50%);
+      width:min(700px,90vw);height:100%;pointer-events:none;
+    }
+
+    /* Ember particles */
+    .ember{
+      position:absolute;bottom:0;border-radius:50%;
+      animation:emberRise 1.8s ease-out infinite;opacity:0;
+    }
+    @keyframes emberRise{
+      0%{transform:translateY(0) translateX(0) scale(1);opacity:.9}
+      60%{opacity:.6}
+      100%{transform:translateY(-55vh) translateX(var(--dx,20px)) scale(.2);opacity:0}
+    }
+
+    /* Peel container */
+    #peel-wrap{
+      position:absolute;bottom:0;left:50%;
+      transform:translateX(-50%) translateY(0) perspective(900px) rotateX(0deg) scale(1);
+      transform-origin:center bottom;
+      transition:none;
+      display:flex;flex-direction:column;align-items:center;
+    }
+    /* Pizza image */
+    #pizza-photo{
+      width:min(500px,80vw);
+      border-radius:50%;
+      box-shadow:0 20px 80px rgba(0,0,0,.8);
+      display:block;
+      transform-origin:center center;
+    }
+    /* Peel stick */
+    #peel-stick{
+      width:18px;height:min(260px,35vw);
+      background:linear-gradient(to right,#C88830,#A06828,#7A4E18);
+      border-radius:3px 3px 6px 6px;
+      box-shadow:2px 0 8px rgba(0,0,0,.5);
+      margin-top:-8px;
+    }
+
+    /* Heat overlay (flickers during baking) */
+    #heat-overlay{
+      position:absolute;inset:0;pointer-events:none;
+      background:radial-gradient(ellipse 60% 50% at 50% 40%, rgba(255,100,0,.35) 0%, transparent 70%);
+      opacity:0;transition:opacity .5s;
+    }
+    #heat-overlay.on{opacity:1;animation:heatPulse .6s ease-in-out infinite alternate}
+    @keyframes heatPulse{from{opacity:.6}to{opacity:1}}
+
+    /* Brand label */
+    #intro-brand{
+      position:absolute;top:7%;width:100%;text-align:center;
+      opacity:0;transition:opacity .8s;pointer-events:none;
+    }
+    #intro-brand.show{opacity:1}
+    #intro-brand h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.8rem,5vw,3.4rem);font-weight:300;color:#fff;letter-spacing:.08em;text-shadow:0 2px 20px rgba(0,0,0,.8)}
+    #intro-brand p{font-family:'DM Sans',sans-serif;font-size:clamp(.6rem,1.4vw,.82rem);letter-spacing:.24em;text-transform:uppercase;color:#E8A040;margin-top:5px;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+
+    /* Sparks during baking */
+    .spark{position:absolute;width:3px;height:3px;border-radius:50%;background:#FFB000;animation:sparkFly 1s ease-out forwards;opacity:1}
+    @keyframes sparkFly{to{transform:translate(var(--sx),var(--sy)) scale(0);opacity:0}}
+    /* ══ END INTRO ══ */
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -670,232 +742,64 @@
 </head>
 <body>
 
-<!-- ══════════ PIZZA INTRO ANIMATION ══════════ -->
+<!-- ══════════ PIZZA INTRO ══════════ -->
 <div id="intro">
-  <svg id="scene-svg" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
+  <!-- Oven glow atmosphere -->
+  <div id="oven-atm"></div>
+  <div id="oven-arch"></div>
+  <div id="oven-vignette"></div>
+  <div id="heat-overlay"></div>
+
+  <!-- SVG arch stone border -->
+  <svg id="arch-border" viewBox="0 0 700 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
     <defs>
-      <radialGradient id="ovenGlow" cx="50%" cy="80%" r="55%">
-        <stop offset="0%" stop-color="#FF7000" stop-opacity=".95"/>
-        <stop offset="55%" stop-color="#BB2200" stop-opacity=".7"/>
-        <stop offset="100%" stop-color="#1A0000" stop-opacity="0"/>
+      <radialGradient id="stoneR" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#7A6A50"/>
+        <stop offset="100%" stop-color="#2A1E10"/>
       </radialGradient>
-      <radialGradient id="stoneGrad" cx="45%" cy="25%" r="65%">
-        <stop offset="0%" stop-color="#7A7060"/>
-        <stop offset="100%" stop-color="#3A342A"/>
-      </radialGradient>
-      <linearGradient id="brickGrad" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="0%" stop-color="#6A3C1A"/>
-        <stop offset="100%" stop-color="#3A1E08"/>
-      </linearGradient>
-      <linearGradient id="woodGrad" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="0%" stop-color="#C88830"/>
-        <stop offset="50%" stop-color="#A06828"/>
-        <stop offset="100%" stop-color="#7A4E18"/>
-      </linearGradient>
-      <radialGradient id="sauceG" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#CC3311"/>
-        <stop offset="100%" stop-color="#881100"/>
-      </radialGradient>
-      <radialGradient id="boardG" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#8B5E2A"/>
-        <stop offset="100%" stop-color="#4A2808"/>
-      </radialGradient>
-      <radialGradient id="floorG" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#5A3000" stop-opacity=".7"/>
-        <stop offset="100%" stop-color="#0C0804" stop-opacity="0"/>
-      </radialGradient>
-      <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     </defs>
-
-    <!-- BG -->
-    <rect width="900" height="520" fill="#0C0804"/>
-    <rect x="0" y="455" width="900" height="65" fill="#110C06"/>
-
-    <!-- ── OVEN DOME (back layer) ── -->
-    <ellipse cx="302" cy="460" rx="165" ry="14" fill="#000" opacity=".5"/>
-    <path d="M145,342 Q145,105 302,105 Q459,105 459,342 Z" fill="url(#stoneGrad)"/>
-    <!-- dome stone seams -->
-    <path d="M150,320 Q150,295 302,295 Q454,295 454,320" fill="none" stroke="#1A1410" stroke-width="1.5" opacity=".55"/>
-    <path d="M158,285 Q158,265 302,265 Q446,265 446,285" fill="none" stroke="#1A1410" stroke-width="1.5" opacity=".45"/>
-    <path d="M172,250 Q172,233 302,233 Q432,233 432,250" fill="none" stroke="#1A1410" stroke-width="1.5" opacity=".38"/>
-    <path d="M192,215 Q192,200 302,200 Q412,200 412,215" fill="none" stroke="#1A1410" stroke-width="1.5" opacity=".3"/>
-    <path d="M218,182 Q218,170 302,170 Q386,170 386,182" fill="none" stroke="#1A1410" stroke-width="1.5" opacity=".25"/>
-    <line x1="302" y1="108" x2="302" y2="338" stroke="#1A1410" stroke-width="1" opacity=".25"/>
-    <line x1="240" y1="122" x2="236" y2="338" stroke="#1A1410" stroke-width="1" opacity=".2"/>
-    <line x1="364" y1="122" x2="368" y2="338" stroke="#1A1410" stroke-width="1" opacity=".2"/>
-    <line x1="185" y1="168" x2="180" y2="338" stroke="#1A1410" stroke-width="1" opacity=".15"/>
-    <line x1="419" y1="168" x2="424" y2="338" stroke="#1A1410" stroke-width="1" opacity=".15"/>
-    <!-- dome highlight -->
-    <path d="M175,295 Q175,148 302,138 Q345,136 378,158" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="3"/>
-
-    <!-- ── OVEN INTERIOR ── -->
-    <path d="M205,343 Q205,238 302,238 Q399,238 399,343 Z" fill="#140600"/>
-    <path id="oven-glow-el" d="M205,343 Q205,238 302,238 Q399,238 399,343 Z" fill="url(#ovenGlow)" opacity="0" style="transition:opacity 1s"/>
-    <!-- Floor glow -->
-    <ellipse id="floor-glow-el" cx="302" cy="456" rx="185" ry="22" fill="url(#floorG)" opacity="0" style="transition:opacity 1s"/>
-
-    <!-- ── FLAMES (start hidden) ── -->
-    <g id="flames-g" opacity="0" style="transition:opacity .8s">
-      <path class="flame" d="M288,342 C278,312 268,290 283,263 C288,278 298,273 293,294 C308,272 318,252 308,230 C323,252 328,278 317,305 C332,279 342,258 332,238 C348,264 347,296 333,322 C343,306 352,292 347,342 Z" fill="#FF8800" opacity=".92"/>
-      <path class="flame" d="M245,342 C237,320 230,302 243,280 C247,294 256,288 251,307 C263,286 270,268 261,250 C275,268 278,292 268,315 C277,298 285,282 279,342 Z" fill="#FF6600" opacity=".8"/>
-      <path class="flame" d="M348,342 C340,320 336,302 347,282 C351,297 360,290 355,310 C368,290 375,273 365,256 C378,274 380,298 369,320 C379,303 386,288 381,342 Z" fill="#FF7700" opacity=".8"/>
-      <ellipse cx="302" cy="342" rx="82" ry="9" fill="#FF3300" opacity=".35"/>
-    </g>
-
-    <!-- ── CHIMNEY ── -->
-    <rect x="280" y="88" width="44" height="28" fill="#4A443A"/>
-    <rect x="274" y="82" width="56" height="12" rx="2" fill="#3A342A"/>
-    <g id="smoke-g" opacity="0" style="transition:opacity .5s">
-      <ellipse class="smk" cx="302" cy="78" rx="7" ry="5" fill="#AAA9A0" opacity="0"/>
-      <ellipse class="smk" cx="296" cy="75" rx="9" ry="6" fill="#999890" opacity="0"/>
-      <ellipse class="smk" cx="308" cy="73" rx="6" ry="4" fill="#AAA9A0" opacity="0"/>
-    </g>
-
-    <!-- ══ PEEL GROUP (animated) ══ -->
-    <g id="peel-g">
-      <!-- handle -->
-      <rect x="516" y="322" width="430" height="14" rx="7" fill="url(#woodGrad)"/>
-      <line x1="545" y1="324" x2="946" y2="324" stroke="rgba(0,0,0,.14)" stroke-width="1"/>
-      <line x1="545" y1="327" x2="946" y2="327" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
-      <!-- paddle -->
-      <path d="M372,288 L518,283 L518,347 L372,342 Q352,342 347,315 Q352,288 372,288 Z" fill="url(#woodGrad)"/>
-      <path d="M373,289 L518,284" stroke="rgba(255,255,255,.11)" stroke-width="1.5"/>
-      <line x1="378" y1="298" x2="518" y2="296" stroke="rgba(0,0,0,.09)" stroke-width="1"/>
-      <line x1="378" y1="309" x2="518" y2="307" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <line x1="378" y1="320" x2="518" y2="318" stroke="rgba(0,0,0,.09)" stroke-width="1"/>
-      <line x1="378" y1="331" x2="518" y2="329" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-
-      <!-- RAW PIZZA -->
-      <g id="raw-pz" transform="translate(434,313)">
-        <ellipse cx="2" cy="6" rx="63" ry="10" fill="rgba(0,0,0,.28)"/>
-        <!-- cornicione -->
-        <ellipse cx="0" cy="0" rx="63" ry="59" fill="#E8D49A"/>
-        <!-- sauce -->
-        <ellipse cx="0" cy="0" rx="49" ry="46" fill="url(#sauceG)"/>
-        <!-- mozzarella (fresh white) -->
-        <ellipse cx="-14" cy="-10" rx="13" ry="11" fill="#FFFFFF" opacity=".96"/>
-        <ellipse cx="16" cy="-17" rx="10" ry="9" fill="#F9F9F9" opacity=".95"/>
-        <ellipse cx="20" cy="13" rx="12" ry="10" fill="#FFFFFF" opacity=".95"/>
-        <ellipse cx="-7" cy="20" rx="9" ry="8" fill="#F8F8F8" opacity=".9"/>
-        <ellipse cx="-25" cy="7" rx="9" ry="8" fill="#FFFFFF" opacity=".9"/>
-        <!-- basil fresh -->
-        <ellipse cx="-18" cy="-21" rx="8" ry="5" fill="#4A8A38" transform="rotate(-30,-18,-21)"/>
-        <ellipse cx="9" cy="22" rx="7" ry="4" fill="#55A03C" transform="rotate(20,9,22)"/>
-        <ellipse cx="28" cy="-4" rx="7" ry="4" fill="#4A8A38" transform="rotate(48,28,-4)"/>
-        <ellipse cx="0" cy="0" rx="63" ry="59" fill="none" stroke="rgba(180,140,60,.35)" stroke-width="1.5"/>
-      </g>
-
-      <!-- BAKED PIZZA (hidden until extracted) -->
-      <g id="baked-pz" transform="translate(434,313)" opacity="0" style="transition:opacity .2s">
-        <ellipse cx="2" cy="6" rx="63" ry="10" fill="rgba(0,0,0,.35)"/>
-        <!-- cornicione (baked dark) -->
-        <ellipse cx="0" cy="0" rx="63" ry="59" fill="#7A3800"/>
-        <!-- sauce -->
-        <ellipse cx="0" cy="0" rx="49" ry="46" fill="#AA2000"/>
-        <!-- mozzarella (golden) -->
-        <ellipse cx="-14" cy="-10" rx="13" ry="11" fill="#EEDDBB" opacity=".96"/>
-        <ellipse cx="16" cy="-17" rx="10" ry="9" fill="#E8D5B0" opacity=".95"/>
-        <ellipse cx="20" cy="13" rx="12" ry="10" fill="#EEDDBB" opacity=".95"/>
-        <ellipse cx="-7" cy="20" rx="9" ry="8" fill="#E8D5B0" opacity=".9"/>
-        <ellipse cx="-25" cy="7" rx="9" ry="8" fill="#EEDDBB" opacity=".9"/>
-        <!-- basil wilted -->
-        <ellipse cx="-18" cy="-21" rx="8" ry="5" fill="#3A6A28" transform="rotate(-30,-18,-21)"/>
-        <ellipse cx="9" cy="22" rx="7" ry="4" fill="#456030" transform="rotate(20,9,22)"/>
-        <ellipse cx="28" cy="-4" rx="7" ry="4" fill="#3A6A28" transform="rotate(48,28,-4)"/>
-        <!-- leopard char spots (Neapolitan!) -->
-        <circle cx="-46" cy="-18" r="5" fill="#0E0400" opacity=".82"/>
-        <circle cx="43" cy="26" r="6" fill="#0E0400" opacity=".78"/>
-        <circle cx="-44" cy="20" r="4" fill="#0E0400" opacity=".72"/>
-        <circle cx="24" cy="-44" r="5" fill="#0E0400" opacity=".72"/>
-        <circle cx="-14" cy="-49" r="4" fill="#0E0400" opacity=".68"/>
-        <circle cx="53" cy="-4" r="4" fill="#0E0400" opacity=".65"/>
-        <circle cx="-51" cy="1" r="3" fill="#0E0400" opacity=".62"/>
-        <circle cx="36" cy="-30" r="3" fill="#0E0400" opacity=".6"/>
-        <circle cx="10" cy="48" r="3" fill="#0E0400" opacity=".55"/>
-      </g>
-    </g><!-- end peel-g -->
-
-    <!-- ── OVEN FRONT FRAME (drawn on top of peel — covers peel edges, arch is transparent) ── -->
+    <!-- Stone arch frame (even-odd: arch opening is transparent) -->
     <path fill-rule="evenodd"
-      d="M145,342 Q145,105 302,105 Q459,105 459,342 Z
-         M205,343 Q205,238 302,238 Q399,238 399,343 Z"
-      fill="url(#stoneGrad)"/>
-    <!-- arch keystone -->
-    <path d="M287,241 L302,226 L317,241" fill="#5A5040" stroke="#2A2018" stroke-width="2"/>
-    <!-- arch rim -->
-    <path d="M205,345 Q205,236 302,236 Q399,236 399,345" fill="none" stroke="#2A1E0C" stroke-width="5"/>
-
-    <!-- ── OVEN BASE BRICKS (on top of peel) ── -->
-    <rect x="140" y="340" width="322" height="118" rx="3" fill="url(#brickGrad)"/>
-    <!-- brick seams horizontal -->
-    <line x1="140" y1="366" x2="462" y2="366" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="140" y1="393" x2="462" y2="393" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="140" y1="420" x2="462" y2="420" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="140" y1="447" x2="462" y2="447" stroke="#220C02" stroke-width="1.5"/>
-    <!-- brick seams vertical -->
-    <line x1="215" y1="340" x2="215" y2="366" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="308" y1="340" x2="308" y2="366" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="398" y1="340" x2="398" y2="366" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="175" y1="366" x2="175" y2="393" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="265" y1="366" x2="265" y2="393" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="355" y1="366" x2="355" y2="393" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="430" y1="366" x2="430" y2="393" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="200" y1="393" x2="200" y2="420" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="295" y1="393" x2="295" y2="420" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="385" y1="393" x2="385" y2="420" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="228" y1="420" x2="228" y2="447" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="318" y1="420" x2="318" y2="447" stroke="#220C02" stroke-width="1.5"/>
-    <line x1="408" y1="420" x2="408" y2="447" stroke="#220C02" stroke-width="1.5"/>
-    <!-- oven ledge -->
-    <rect x="140" y="337" width="322" height="8" rx="2" fill="#4A2C0E"/>
-
-    <!-- ── WOODEN BOARD ── -->
-    <g id="board-g" opacity="0" style="transition:opacity .5s">
-      <ellipse cx="688" cy="455" rx="98" ry="11" fill="#000" opacity=".4"/>
-      <ellipse cx="688" cy="402" rx="93" ry="57" fill="url(#boardG)"/>
-      <ellipse cx="688" cy="402" rx="93" ry="57" fill="none" stroke="#2A1404" stroke-width="3"/>
-      <path d="M615,403 Q648,391 688,392 Q728,393 761,403" fill="none" stroke="rgba(0,0,0,.13)" stroke-width="1.5"/>
-      <path d="M617,414 Q650,405 688,406 Q726,407 759,414" fill="none" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <path d="M620,392 Q652,381 688,382 Q724,383 756,392" fill="none" stroke="rgba(0,0,0,.09)" stroke-width="1"/>
-    </g>
-
-    <!-- ── PIZZA ON BOARD ── -->
-    <g id="board-pizza-g" transform="translate(688,396)" opacity="0" style="transition:opacity .6s">
-      <ellipse cx="2" cy="6" rx="74" ry="11" fill="rgba(0,0,0,.3)"/>
-      <ellipse cx="0" cy="0" rx="74" ry="69" fill="#7A3800"/>
-      <ellipse cx="0" cy="0" rx="59" ry="55" fill="url(#sauceG)"/>
-      <ellipse cx="-15" cy="-11" rx="14" ry="12" fill="#EEDDBB" opacity=".96"/>
-      <ellipse cx="18" cy="-19" rx="11" ry="10" fill="#E8D5B0" opacity=".95"/>
-      <ellipse cx="22" cy="14" rx="13" ry="11" fill="#EEDDBB" opacity=".95"/>
-      <ellipse cx="-8" cy="22" rx="10" ry="9" fill="#E8D5B0" opacity=".9"/>
-      <ellipse cx="-28" cy="8" rx="10" ry="9" fill="#EEDDBB" opacity=".9"/>
-      <ellipse cx="-20" cy="-23" rx="9" ry="5" fill="#3A6A28" transform="rotate(-30,-20,-23)"/>
-      <ellipse cx="10" cy="25" rx="8" ry="5" fill="#456030" transform="rotate(20,10,25)"/>
-      <ellipse cx="31" cy="-5" rx="8" ry="4" fill="#3A6A28" transform="rotate(48,31,-5)"/>
-      <circle cx="-50" cy="-20" r="5" fill="#0E0400" opacity=".8"/>
-      <circle cx="47" cy="28" r="6" fill="#0E0400" opacity=".75"/>
-      <circle cx="-48" cy="22" r="4" fill="#0E0400" opacity=".72"/>
-      <circle cx="26" cy="-48" r="5" fill="#0E0400" opacity=".7"/>
-      <circle cx="-15" cy="-53" r="4" fill="#0E0400" opacity=".65"/>
-      <circle cx="57" cy="-5" r="4" fill="#0E0400" opacity=".62"/>
-      <circle cx="-56" cy="2" r="3" fill="#0E0400" opacity=".6"/>
-      <circle cx="40" cy="-34" r="3" fill="#0E0400" opacity=".58"/>
-    </g>
-
-    <!-- counter -->
-    <rect x="462" y="452" width="438" height="10" rx="2" fill="#1A0E06" opacity=".85"/>
-    <!-- wood pile -->
-    <rect x="55" y="438" width="72" height="12" rx="3" fill="#4A2A0E" opacity=".55"/>
-    <rect x="60" y="426" width="62" height="12" rx="3" fill="#3A1E06" opacity=".5"/>
-    <rect x="65" y="414" width="52" height="12" rx="3" fill="#4A2A0E" opacity=".45"/>
+      d="M0,0 L700,0 L700,900 L0,900 Z
+         M120,480 Q120,90 350,90 Q580,90 580,480 Z"
+      fill="#1C1208" opacity=".92"/>
+    <!-- Arch highlight rim -->
+    <path d="M122,482 Q122,92 350,92 Q578,92 578,482"
+      fill="none" stroke="#3A2A14" stroke-width="8"/>
+    <path d="M130,482 Q130,102 350,102 Q570,102 570,482"
+      fill="none" stroke="rgba(255,180,80,.08)" stroke-width="3"/>
+    <!-- Stone seams on arch -->
+    <path d="M135,420 Q140,180 350,165 Q560,180 565,420" fill="none" stroke="#1A1008" stroke-width="2" opacity=".6"/>
+    <path d="M145,360 Q155,220 350,210 Q545,220 555,360" fill="none" stroke="#1A1008" stroke-width="1.5" opacity=".5"/>
+    <path d="M160,300 Q175,248 350,242 Q525,248 540,300" fill="none" stroke="#1A1008" stroke-width="1.5" opacity=".4"/>
+    <!-- Keystone -->
+    <path d="M330,95 L350,75 L370,95 Z" fill="#5A4A30" stroke="#2A1A08" stroke-width="2"/>
+    <!-- Soot marks around arch -->
+    <path d="M122,482 Q122,92 350,92 Q578,92 578,482"
+      fill="none" stroke="rgba(0,0,0,.4)" stroke-width="18" stroke-dasharray="1 12" stroke-linecap="round"/>
   </svg>
 
-  <div id="intro-label">
+  <!-- Ember particles -->
+  <div class="ember" style="left:45%;width:4px;height:4px;background:#FF8800;animation-delay:0s;animation-duration:2.2s;--dx:-30px"></div>
+  <div class="ember" style="left:52%;width:3px;height:3px;background:#FFB000;animation-delay:.7s;animation-duration:1.9s;--dx:25px"></div>
+  <div class="ember" style="left:49%;width:5px;height:5px;background:#FF6600;animation-delay:1.3s;animation-duration:2.5s;--dx:-15px"></div>
+  <div class="ember" style="left:47%;width:3px;height:3px;background:#FFD000;animation-delay:.4s;animation-duration:1.7s;--dx:40px"></div>
+  <div class="ember" style="left:54%;width:4px;height:4px;background:#FF9900;animation-delay:1.0s;animation-duration:2.1s;--dx:-45px"></div>
+
+  <!-- Pizza on peel -->
+  <div id="peel-wrap">
+    <img id="pizza-photo" src="pizza.jpg" alt="Neapolitanische Pizza"/>
+    <div id="peel-stick"></div>
+  </div>
+
+  <!-- Brand -->
+  <div id="intro-brand">
     <h1>Sir Gustav</h1>
     <p>Café · Mensch · Bar · Offenburg</p>
   </div>
 </div>
 <!-- ══════════ END INTRO ══════════ -->
+
 
   <!-- NAV -->
   <nav id="nav">
@@ -1321,79 +1225,52 @@
   <script>
     // ── PIZZA INTRO SEQUENCE ──
     (function(){
-      const intro   = document.getElementById('intro');
-      const peel    = document.getElementById('peel-g');
-      const rawPz   = document.getElementById('raw-pz');
-      const bakedPz = document.getElementById('baked-pz');
-      const flames  = document.getElementById('flames-g');
-      const glow    = document.getElementById('oven-glow-el');
-      const smoke   = document.getElementById('smoke-g');
-      const floorG  = document.getElementById('floor-glow-el');
-      const boardG  = document.getElementById('board-g');
-      const brdPizza= document.getElementById('board-pizza-g');
-      const label   = document.getElementById('intro-label');
+      const intro = document.getElementById('intro');
+      const peel  = document.getElementById('peel-wrap');
+      const atm   = document.getElementById('oven-atm');
+      const heat  = document.getElementById('heat-overlay');
+      const brand = document.getElementById('intro-brand');
 
-      // helper: move peel
-      function movePeel(tx, dur, ease){
-        peel.style.transition = `transform ${dur}s ${ease||'cubic-bezier(.4,0,.2,1)'}`;
-        peel.style.transform  = `translateX(${tx}px)`;
-      }
-
-      // START: peel off-screen right
+      // Start: peel off-screen bottom
       peel.style.transition = 'none';
-      peel.style.transform  = 'translateX(520px)';
+      peel.style.transform = 'translateX(-50%) translateY(120%) perspective(900px) rotateX(0deg) scale(1)';
 
-      // 0.15s → peel slides in
-      setTimeout(()=>{ movePeel(0, .9); }, 150);
+      // 0.1s: oven atmosphere fades in
+      setTimeout(()=>{ atm.classList.add('on'); }, 100);
 
-      // 1.0s → brand label appears
-      setTimeout(()=>{ label.classList.add('show'); }, 1000);
-
-      // 2.2s → insert pizza into oven
-      setTimeout(()=>{ movePeel(-148, 1.15); }, 2200);
-
-      // 3.5s → pizza hidden, flames + glow on
+      // 0.3s: pizza slides up into view
       setTimeout(()=>{
-        rawPz.style.transition='opacity .25s'; rawPz.style.opacity='0';
-        flames.style.opacity='1';
-        glow.style.opacity='.88';
-        floorG.style.opacity='.9';
-        smoke.style.opacity='1';
-      }, 3500);
+        peel.style.transition = 'transform .7s cubic-bezier(.25,0,.3,1)';
+        peel.style.transform = 'translateX(-50%) translateY(0%) perspective(900px) rotateX(0deg) scale(1)';
+      }, 300);
 
-      // 6.8s → peel re-enters to grab pizza
-      setTimeout(()=>{ movePeel(-148,.5,'cubic-bezier(.4,0,.2,1)'); }, 6800);
-
-      // 7.3s → baked pizza appears, peel pulls out
+      // 1.1s: pizza slides INTO oven (shrinks + tilts — depth effect)
       setTimeout(()=>{
-        bakedPz.style.opacity='1';
-        movePeel(0, 1.3, 'cubic-bezier(.2,0,.3,1)');
-      }, 7300);
+        peel.style.transition = 'transform .9s cubic-bezier(.4,0,.2,1)';
+        peel.style.transform = 'translateX(-50%) translateY(-40%) perspective(900px) rotateX(25deg) scale(0.35)';
+      }, 1100);
 
-      // 8.0s → flames die
+      // 1.6s: heat/baking effect
+      setTimeout(()=>{ heat.classList.add('on'); }, 1600);
+
+      // 1.7s: brand appears
+      setTimeout(()=>{ brand.classList.add('show'); }, 1700);
+
+      // 2.8s: heat off, pizza comes back out
       setTimeout(()=>{
-        flames.style.opacity='.15';
-        glow.style.opacity='.25';
-        smoke.style.opacity='0';
-        floorG.style.opacity='.2';
-      }, 8000);
+        heat.classList.remove('on');
+        peel.style.transition = 'transform .8s cubic-bezier(.2,0,.3,1)';
+        peel.style.transform = 'translateX(-50%) translateY(0%) perspective(900px) rotateX(0deg) scale(1)';
+      }, 2800);
 
-      // 8.8s → board appears
-      setTimeout(()=>{ boardG.style.opacity='1'; }, 8800);
+      // 3.8s: oven dims
+      setTimeout(()=>{ atm.style.opacity = '.3'; atm.style.transition = 'opacity .6s'; }, 3800);
 
-      // 9.2s → pizza lands on board, peel exits right
-      setTimeout(()=>{
-        brdPizza.style.opacity='1';
-        peel.style.transition='transform .8s cubic-bezier(.4,0,.2,1), opacity .5s';
-        peel.style.transform='translateX(620px)';
-        peel.style.opacity='0';
-      }, 9200);
+      // 4.2s: intro slides UP
+      setTimeout(()=>{ intro.classList.add('out'); }, 4200);
 
-      // 10.2s → intro slides UP
-      setTimeout(()=>{ intro.classList.add('closing'); }, 10200);
-
-      // 11.7s → remove from DOM
-      setTimeout(()=>{ intro.remove(); }, 11700);
+      // 5.4s: remove from DOM
+      setTimeout(()=>{ intro.remove(); }, 5400);
     })();
 
     // ── NAV pill cursor
