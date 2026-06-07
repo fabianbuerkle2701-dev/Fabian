@@ -12,8 +12,8 @@
   <style>
     /* ══ INTRO ══ */
     #intro{position:fixed;inset:0;z-index:9999;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center}
-    #intro.out{animation:introSlide 2.2s cubic-bezier(.6,0,.2,1) forwards}
-    @keyframes introSlide{0%{transform:translateY(0);opacity:1}80%{opacity:1}100%{transform:translateY(-100%);opacity:0}}
+    #intro.out{animation:introFade 3s cubic-bezier(.4,0,.2,1) forwards}
+    @keyframes introFade{0%{opacity:1}40%{opacity:.8}100%{opacity:0;pointer-events:none}}
     #intro-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
     #intro-brand{
       position:absolute;bottom:12%;width:100%;text-align:center;
@@ -1129,7 +1129,7 @@
         intro.classList.add('out');
         // Trigger page elements to slide in as intro glides away
         document.body.classList.add('page-revealed');
-        setTimeout(()=>{ intro.remove(); }, 2400);
+        setTimeout(()=>{ intro.remove(); }, 3100);
       }
 
       // When video ends → slide intro away
