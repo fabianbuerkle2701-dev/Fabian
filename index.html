@@ -161,15 +161,21 @@
     /* ── HERO ── */
     .hero {
       min-height: 100svh;
-      background:
-        linear-gradient(to bottom, rgba(22,16,10,.72) 0%, rgba(22,16,10,.42) 40%, rgba(22,16,10,.82) 100%),
-        url('https://images.unsplash.com/photo-1514190051997-0f6f39ca5cde?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+      background: linear-gradient(to bottom, rgba(22,16,10,.72) 0%, rgba(22,16,10,.42) 40%, rgba(22,16,10,.82) 100%);
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center;
       padding: calc(var(--nav-h) + 60px) 24px 80px;
       position: relative;
+      z-index: 1;
     }
+    #hero-video-bg {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+      transition: opacity 1.5s ease;
+      pointer-events: none;
+    }
+    #hero-video-bg.fade-out { opacity: 0; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
       background: rgba(184,132,42,.15);
@@ -1126,13 +1132,29 @@
       setTimeout(()=>{ brand.classList.add('show'); }, 1000);
 
       function endIntro(){
+        // Lift video out of intro — make it the fixed hero background
+        video.id = 'hero-video-bg';
+        video.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;transition:opacity 1.5s ease';
+        document.body.insertBefore(video, document.body.firstChild);
+
+        // Fade out the intro wrapper (black bg + brand text)
         intro.classList.add('out');
-        // Trigger page elements to slide in as intro glides away
         document.body.classList.add('page-revealed');
         setTimeout(()=>{ intro.remove(); }, 1500);
+
+        // Fade out video when hero scrolls out of view
+        const heroEl = document.getElementById('hero');
+        const obs = new IntersectionObserver(([e])=>{
+          if(!e.isIntersecting){
+            video.classList.add('fade-out');
+            setTimeout(()=>{ video.remove(); }, 1600);
+            obs.disconnect();
+          }
+        }, { threshold: 0 });
+        obs.observe(heroEl);
       }
 
-      // When video ends → fade intro away
+      // When video ends → transition to hero
       video.addEventListener('ended', endIntro);
 
       // Fallback only if video errors out
