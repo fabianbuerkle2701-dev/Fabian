@@ -1132,23 +1132,30 @@
       setTimeout(()=>{ brand.classList.add('show'); }, 1000);
 
       function endIntro(){
-        // Freeze on last frame, then lift out of intro as fixed hero background
-        video.pause();
-        video.id = 'hero-video-bg';
-        video.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;transition:opacity 1.5s ease';
-        document.body.insertBefore(video, document.body.firstChild);
+        // Capture last frame as a static image via canvas
+        const canvas = document.createElement('canvas');
+        canvas.width  = video.videoWidth  || window.innerWidth;
+        canvas.height = video.videoHeight || window.innerHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        video.remove();
 
-        // Fade out the intro wrapper (black bg + brand text)
+        const img = document.createElement('img');
+        img.id = 'hero-video-bg';
+        img.src = canvas.toDataURL('image/jpeg', 0.92);
+        img.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;transition:opacity 1.5s ease';
+        document.body.insertBefore(img, document.body.firstChild);
+
+        // Fade out the intro wrapper
         intro.classList.add('out');
         document.body.classList.add('page-revealed');
         setTimeout(()=>{ intro.remove(); }, 1500);
 
-        // Fade out video when hero scrolls out of view
+        // Fade out still image when hero scrolls out of view
         const heroEl = document.getElementById('hero');
         const obs = new IntersectionObserver(([e])=>{
           if(!e.isIntersecting){
-            video.classList.add('fade-out');
-            setTimeout(()=>{ video.remove(); }, 1600);
+            img.classList.add('fade-out');
+            setTimeout(()=>{ img.remove(); }, 1600);
             obs.disconnect();
           }
         }, { threshold: 0 });
