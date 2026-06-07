@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Durbach-Ranch | Reiten im Schwarzwald – Familie Winkler</title>
+  <meta name="description" content="Erleben Sie Western-Reiten im Herzen des Schwarzwalds. Reitunterricht, Ausritte, Ferienreitkurse und Jugendcamp auf der Durbach-Ranch von Familie Winkler seit 2001." />
+  <meta name="keywords" content="Durbach Ranch, Reiten Schwarzwald, Reitschule Durbach, Ausritte Ortenaukreis, Ferienreitkurs, Jugendcamp Pferde, Therapeutisches Reiten" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:      #1C2B1A;
+      --primary-mid:  #2D4A2A;
+      --accent:       #C8922A;
+      --accent-hover: #A97520;
+      --accent-light: #FDF3E3;
+      --bg:           #FAF7F2;
+      --surface:      #FFFFFF;
+      --muted-bg:     #F2EDE5;
+      --text:         #1A1208;
+      --muted:        #6B5F4E;
+      --light:        #A89880;
+      --border:       #E5DDD4;
+      --radius-sm:    6px;
+      --radius:       12px;
+      --radius-lg:    20px;
+      --font-head:    'Lexend', sans-serif;
+      --font-body:    'Source Sans 3', sans-serif;
+      --shadow-sm:    0 1px 4px rgba(28,43,26,0.06), 0 1px 2px rgba(28,43,26,0.04);
+      --shadow:       0 4px 16px rgba(28,43,26,0.08), 0 2px 6px rgba(28,43,26,0.04);
+      --shadow-lg:    0 12px 40px rgba(28,43,26,0.12), 0 4px 12px rgba(28,43,26,0.06);
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      z-index: 100;
+      background: rgba(250,247,242,0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow); }
+
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 40px;
+      height: 80px; display: flex; align-items: center;
+      justify-content: space-between; position: relative;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 44px; height: 44px;
+      background: var(--primary);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); flex-shrink: 0;
+    }
+    .nav-logo-icon svg { width: 26px; height: 26px; }
+    .nav-logo-name {
+      font-family: var(--font-head);
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--primary); line-height: 1.1; letter-spacing: -0.01em;
+    }
+    .nav-logo-sub {
+      font-size: 0.7rem; color: var(--muted);
+      font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 0;
+      list-style: none;
+      position: absolute; left: 50%; transform: translateX(-50%);
+      background: var(--muted-bg);
+      border-radius: 9999px; padding: 4px;
+    }
+    .nav-links li { position: relative; z-index: 1; }
+    .nav-links a {
+      font-family: var(--font-body);
+      color: var(--primary); text-decoration: none;
+      font-size: 0.88rem; font-weight: 500;
+      padding: 7px 16px; display: block;
+      border-radius: 9999px;
+      transition: color 0.2s; white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cursor {
+      position: absolute; top: 4px; left: 0;
+      height: calc(100% - 8px);
+      background: var(--surface); border-radius: 9999px;
+      box-shadow: var(--shadow-sm); pointer-events: none;
+      transition: left 0.22s cubic-bezier(.4,0,.2,1), width 0.22s cubic-bezier(.4,0,.2,1), opacity 0.18s;
+      opacity: 0; z-index: 0;
+    }
+
+    .nav-cta {
+      background: var(--accent); color: white;
+      padding: 10px 22px; border-radius: 9999px;
+      font-family: var(--font-body); font-size: 0.88rem; font-weight: 600;
+      text-decoration: none; white-space: nowrap;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 2px 10px rgba(200,146,42,0.35);
+    }
+    .nav-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(200,146,42,0.45);
+    }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 8px;
+      background: none; border: none;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--primary); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed;
+      top: 80px; left: 0; right: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      z-index: 99; padding: 16px 24px 24px;
+      flex-direction: column; gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 13px 16px; font-family: var(--font-body);
+      font-size: 0.95rem; font-weight: 600; color: var(--muted);
+      text-decoration: none; border-radius: var(--radius-sm);
+      border-left: 3px solid transparent;
+      transition: background 0.15s, border-left-color 0.15s, color 0.15s;
+    }
+    .mobile-menu a:hover { background: var(--muted-bg); border-left-color: var(--accent); color: var(--accent); }
+    .mobile-menu .mobile-cta {
+      margin-top: 8px; background: var(--accent); color: white;
+      text-align: center; border-radius: var(--radius); padding: 14px;
+      font-weight: 600; border-left: none;
+    }
+    .mobile-menu .mobile-cta:hover { background: var(--accent-hover); border-left: none; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; z-index: 0;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(110deg, rgba(28,43,26,0.88) 0%, rgba(28,43,26,0.65) 55%, rgba(28,43,26,0.2) 85%, transparent 100%);
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+      padding: 120px 48px 80px; width: 100%;
+    }
+    .hero-text-col { max-width: 640px; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 28px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 9999px; padding: 6px 16px 6px 8px;
+      animation: fadeUp 0.6s 0.1s both;
+    }
+    .hero-eyebrow-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+    }
+    .hero-eyebrow span {
+      font-family: var(--font-body); font-size: 0.82rem;
+      font-weight: 500; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.03em; color: #ffffff;
+      margin-bottom: 24px;
+      animation: fadeUp 0.7s 0.2s both;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+
+    .hero-desc {
+      font-size: 1.1rem; color: rgba(255,255,255,0.72);
+      line-height: 1.8; margin-bottom: 40px; max-width: 520px;
+      animation: fadeUp 0.6s 0.35s both;
+    }
+
+    .hero-actions {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 60px;
+      animation: fadeUp 0.6s 0.45s both;
+    }
+
+    .btn-primary {
+      background: var(--accent); color: white;
+      padding: 14px 28px; border-radius: var(--radius);
+      font-family: var(--font-body); font-weight: 600;
+      font-size: 0.95rem; text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 24px rgba(200,146,42,0.45); cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(200,146,42,0.55);
+    }
+    .btn-primary:active { transform: scale(0.97); }
+
+    .btn-outline {
+      background: transparent; color: rgba(255,255,255,0.9);
+      padding: 14px 28px; border-radius: var(--radius);
+      font-family: var(--font-body); font-weight: 600;
+      font-size: 0.95rem; text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.65); color: white;
+      transform: translateY(-1px);
+    }
+
+    .hero-badges {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.55s both;
+    }
+    .hero-badge {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius); padding: 10px 16px;
+      backdrop-filter: blur(4px);
+    }
+    .hero-badge-icon {
+      width: 32px; height: 32px; flex-shrink: 0; color: var(--accent);
+    }
+    .hero-badge-text {
+      font-size: 0.82rem; font-weight: 600;
+      color: rgba(255,255,255,0.92); line-height: 1.3;
+    }
+    .hero-badge-text span {
+      display: block; font-weight: 400;
+      color: rgba(255,255,255,0.55); font-size: 0.75rem;
+    }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar { background: var(--primary); padding: 40px; }
+    .stats-bar-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    }
+    .stat-item {
+      padding: 24px 28px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: var(--font-head); font-size: 2.6rem;
+      font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: var(--font-body); font-size: 0.85rem;
+      color: rgba(255,255,255,0.55); font-weight: 400;
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 96px 40px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 16px;
+      background: var(--accent-light); border-radius: 9999px;
+      padding: 5px 14px 5px 10px;
+    }
+    .section-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .section-eyebrow span {
+      font-family: var(--font-body); font-size: 0.78rem;
+      font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent);
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 700; color: var(--primary);
+      margin-bottom: 16px; line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--muted);
+      max-width: 560px; line-height: 1.8; margin-bottom: 56px;
+    }
+
+    /* ─── ÜBER UNS ─── */
+    #ueber-uns { background: var(--surface); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .about-img-wrap { position: relative; }
+    .about-img {
+      width: 100%; height: 480px; object-fit: cover;
+      border-radius: var(--radius-lg); display: block;
+    }
+    .about-img-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--accent); color: white;
+      border-radius: var(--radius);
+      padding: 18px 22px; text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .about-img-badge-num {
+      font-family: var(--font-head); font-size: 2rem; font-weight: 800; line-height: 1;
+    }
+    .about-img-badge-text { font-size: 0.78rem; font-weight: 500; opacity: 0.9; }
+
+    .about-text { padding-top: 12px; }
+    .about-text p {
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.85; margin-bottom: 16px;
+    }
+    .about-highlight {
+      margin-top: 32px; padding: 24px 28px;
+      background: var(--muted-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .about-highlight-title {
+      font-family: var(--font-body); font-size: 0.72rem;
+      font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+    }
+    .about-highlight ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .about-highlight li {
+      font-size: 0.9rem; color: var(--primary-mid);
+      display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+    }
+    .about-highlight li svg {
+      width: 15px; height: 15px; color: var(--accent);
+      flex-shrink: 0; margin-top: 3px;
+    }
+
+    /* ─── ANGEBOTE ─── */
+    #angebote { background: var(--muted-bg); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .service-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.28s cubic-bezier(0.22,1,0.36,1), box-shadow 0.28s, border-color 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg); border-color: #E8C97A;
+    }
+    .service-card-img {
+      width: 100%; height: 180px; object-fit: cover; display: block;
+    }
+    .service-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .service-card-icon {
+      width: 44px; height: 44px;
+      background: var(--accent-light); border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); margin-bottom: 16px;
+      transition: background 0.2s;
+    }
+    .service-card:hover .service-card-icon { background: var(--accent); color: white; }
+    .service-card-icon svg { width: 22px; height: 22px; }
+    .service-card h3 {
+      font-family: var(--font-head); font-size: 1.05rem;
+      font-weight: 700; color: var(--primary); margin-bottom: 10px;
+    }
+    .service-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; flex: 1; }
+    .service-card-price {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 18px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: 0.82rem; font-weight: 700;
+      padding: 5px 14px; border-radius: 9999px;
+      border: 1px solid rgba(200,146,42,0.2);
+    }
+
+    /* ─── PREISE ─── */
+    #preise { background: var(--surface); }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .price-card {
+      background: var(--muted-bg); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .price-card.featured {
+      background: var(--primary); border-color: var(--primary);
+      position: relative; overflow: hidden;
+    }
+    .price-card.featured::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 130px; height: 130px; border-radius: 50%;
+      background: rgba(200,146,42,0.15);
+    }
+    .price-card-tag {
+      display: inline-block;
+      background: var(--accent-light); color: var(--accent);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 9999px;
+      margin-bottom: 16px;
+    }
+    .price-card.featured .price-card-tag { background: rgba(200,146,42,0.2); color: var(--accent); }
+    .price-card h3 {
+      font-family: var(--font-head); font-size: 1.15rem;
+      font-weight: 700; color: var(--primary); margin-bottom: 8px;
+    }
+    .price-card.featured h3 { color: #fff; }
+    .price-card-desc { font-size: 0.875rem; color: var(--muted); margin-bottom: 24px; line-height: 1.65; }
+    .price-card.featured .price-card-desc { color: rgba(255,255,255,0.6); }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .price-list li {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.9rem; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .price-card.featured .price-list li { border-bottom-color: rgba(255,255,255,0.1); }
+    .price-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .price-list-label { color: var(--muted); }
+    .price-card.featured .price-list-label { color: rgba(255,255,255,0.65); }
+    .price-list-val {
+      font-family: var(--font-head); font-weight: 700;
+      color: var(--primary); font-size: 0.95rem;
+    }
+    .price-card.featured .price-list-val { color: var(--accent); }
+
+    /* ─── GALERIE ─── */
+    #galerie { background: var(--muted-bg); padding: 96px 0; }
+    #galerie .section-inner { padding: 0 40px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 240px 240px;
+      gap: 8px; margin-top: 0;
+    }
+    .gallery-item {
+      overflow: hidden; border-radius: var(--radius);
+      position: relative; cursor: pointer;
+    }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; border-radius: var(--radius-lg); }
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.55s cubic-bezier(0.22,1,0.36,1), filter 0.3s;
+    }
+    .gallery-item:hover img { transform: scale(1.07); filter: brightness(0.85); }
+    .gallery-item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,43,26,0.4) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* ─── EINSATZGEBIET ─── */
+    #einsatzgebiet { background: var(--surface); }
+    .location-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 72px; align-items: start;
+    }
+    .location-text p { font-size: 1rem; color: var(--muted); line-height: 1.85; margin-bottom: 24px; }
+    .location-map {
+      background: var(--muted-bg); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .location-map iframe { width: 100%; height: 380px; border: none; display: block; }
+    .location-info {
+      display: flex; flex-direction: column; gap: 10px; margin-top: 28px;
+    }
+    .location-info-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px;
+      background: var(--muted-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); font-size: 0.9rem;
+      color: var(--primary-mid); font-weight: 500;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .location-info-item svg {
+      width: 18px; height: 18px; color: var(--accent); flex-shrink: 0;
+    }
+    .location-info-item:hover {
+      background: var(--accent-light); border-color: rgba(200,146,42,0.3);
+      transform: translateX(4px);
+    }
+
+    /* ─── KONTAKT ─── */
+    #kontakt { background: var(--muted-bg); }
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 64px; align-items: start;
+    }
+    .contact-left h3 {
+      font-family: var(--font-head); font-size: 1.4rem;
+      font-weight: 700; margin-bottom: 8px; color: var(--primary);
+    }
+    .contact-left p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+
+    .contact-items { display: flex; flex-direction: column; gap: 10px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); text-decoration: none;
+      color: inherit; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      box-shadow: var(--shadow-sm); cursor: pointer;
+    }
+    .contact-item:hover {
+      border-color: rgba(200,146,42,0.35);
+      box-shadow: var(--shadow); transform: translateY(-2px);
+    }
+    .contact-icon {
+      width: 40px; height: 40px;
+      background: var(--accent-light); border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--accent);
+    }
+    .contact-icon svg { width: 18px; height: 18px; }
+    .contact-label {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--light); margin-bottom: 2px;
+    }
+    .contact-value { font-size: 0.9rem; font-weight: 600; color: var(--primary); }
+
+    .contact-form {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 36px;
+      box-shadow: var(--shadow);
+    }
+    .contact-form h3 {
+      font-family: var(--font-head); font-size: 1.3rem;
+      font-weight: 700; margin-bottom: 6px; color: var(--primary);
+    }
+    .contact-form p { font-size: 0.9rem; color: var(--muted); margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block; font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; background: var(--muted-bg);
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      color: var(--text); padding: 12px 14px;
+      font-size: 0.9rem; font-family: var(--font-body);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      min-height: 44px;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--accent); background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(200,146,42,0.14);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%; background: var(--accent); color: white;
+      border: none; border-radius: var(--radius); padding: 14px;
+      font-family: var(--font-body); font-size: 0.95rem;
+      font-weight: 600; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(200,146,42,0.3);
+    }
+    .form-submit:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(200,146,42,0.4);
+    }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--primary); color: rgba(255,255,255,0.65); padding: 64px 40px 36px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 1.8fr 1fr 1fr;
+      gap: 56px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 32px;
+    }
+    .footer-logo-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .footer-logo-icon {
+      width: 40px; height: 40px;
+      background: rgba(200,146,42,0.15); border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center; color: var(--accent);
+    }
+    .footer-logo-icon svg { width: 22px; height: 22px; }
+    .footer-logo-name {
+      font-family: var(--font-head); font-size: 1rem;
+      font-weight: 700; color: rgba(255,255,255,0.9);
+    }
+    .footer-brand-desc { font-size: 0.875rem; line-height: 1.75; margin-bottom: 24px; color: rgba(255,255,255,0.5); }
+    .footer-contact-link {
+      display: flex; align-items: center; gap: 10px;
+      color: rgba(255,255,255,0.5); text-decoration: none;
+      font-size: 0.875rem; margin-bottom: 10px; transition: color 0.2s;
+    }
+    .footer-contact-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .footer-contact-link:hover { color: var(--accent); }
+    .footer-col-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      margin-bottom: 18px; padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-col-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col-links a {
+      font-size: 0.875rem; color: rgba(255,255,255,0.5);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-col-links a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a {
+      font-size: 0.78rem; color: rgba(255,255,255,0.35);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: var(--accent); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .stagger > * {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
+    }
+    .stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger.visible > *:nth-child(2) { transition-delay: 0.12s; }
+    .stagger.visible > *:nth-child(3) { transition-delay: 0.19s; }
+    .stagger.visible > *:nth-child(4) { transition-delay: 0.26s; }
+    .stagger.visible > *:nth-child(5) { transition-delay: 0.33s; }
+    .stagger.visible > *:nth-child(6) { transition-delay: 0.40s; }
+    .stagger.visible > * { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .about-grid, .location-grid, .contact-layout, .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .services-grid, .pricing-grid { grid-template-columns: 1fr 1fr; }
+      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+      .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; height: 260px; }
+      .gallery-item:nth-child(4) { grid-column: span 2; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero-inner { padding: 110px 24px 80px; }
+      section { padding: 72px 24px; }
+      footer { padding: 56px 24px 32px; }
+      .about-img { height: 340px; }
+    }
+    @media (max-width: 600px) {
+      .services-grid, .pricing-grid, .form-row { grid-template-columns: 1fr; }
+      .stats-bar-inner { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:nth-child(1) { height: 200px; }
+      .hero-inner { padding: 100px 20px 60px; }
+      .hero h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
+      .hero-badges { flex-direction: column; gap: 10px; }
+      .hero-actions { flex-direction: column; }
+      section { padding: 56px 20px; }
+      .nav-inner { padding: 0 20px; }
+      .contact-form { padding: 24px 20px; }
+      footer { padding: 40px 20px 24px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 0c0 0-2 4-2 8s2 8 2 8m0-16c0 0 2 4 2 8s-2 8-2 8m-8-4h16M4.93 8h14.14"/></svg>
+        </div>
+        <div>
+          <div class="nav-logo-name">Durbach-Ranch</div>
+          <div class="nav-logo-sub">Familie Winkler · seit 2001</div>
+        </div>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <div class="nav-cursor" id="navCursor"></div>
+        <li><a href="#ueber-uns">Über uns</a></li>
+        <li><a href="#angebote">Angebote</a></li>
+        <li><a href="#preise">Preise</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+
+      <a href="#kontakt" class="nav-cta">Jetzt anfragen</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#ueber-uns" onclick="closeMenu()">Über uns</a>
+    <a href="#angebote" onclick="closeMenu()">Angebote</a>
+    <a href="#preise" onclick="closeMenu()">Preise</a>
+    <a href="#galerie" onclick="closeMenu()">Galerie</a>
+    <a href="#kontakt" onclick="closeMenu()">Kontakt</a>
+    <a href="tel:078194880016" class="mobile-cta">07 81 / 948 80 16</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img class="hero-bg" src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1800&q=85" alt="Pferde auf der Durbach-Ranch im Schwarzwald" />
+    <div class="hero-inner">
+      <div class="hero-text-col">
+        <div class="hero-eyebrow">
+          <div class="hero-eyebrow-dot"></div>
+          <span>Reiten im Schwarzwald · Ortenaukreis</span>
+        </div>
+        <h1>Willkommen auf der<br /><em>Durbach-Ranch</em></h1>
+        <p class="hero-desc">Erleben Sie unvergessliche Momente zu Pferd inmitten der malerischen Rebhänge und Wälder des Schwarzwalds. Familie Winkler heißt Sie herzlich willkommen.</p>
+        <div class="hero-actions">
+          <a href="#angebote" class="btn-primary">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            Unsere Angebote
+          </a>
+          <a href="#kontakt" class="btn-outline">Termin vereinbaren</a>
+        </div>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <svg class="hero-badge-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+            <div class="hero-badge-text">Familienbetrieb<span>seit 2001 mit Herz & Leidenschaft</span></div>
+          </div>
+          <div class="hero-badge">
+            <svg class="hero-badge-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            <div class="hero-badge-text">Traumlage Durbach<span>zwischen Reben & Schwarzwald</span></div>
+          </div>
+          <div class="hero-badge">
+            <svg class="hero-badge-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+            <div class="hero-badge-text">40 Jahre Erfahrung<span>sozial-pädagogische Expertise</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner stagger">
+      <div class="stat-item">
+        <div class="stat-number" data-target="2001" data-display="2001">2001</div>
+        <div class="stat-label">Gegründet von Familie Winkler</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="45" data-suffix="+">0</div>
+        <div class="stat-label">Fohlen auf der Ranch geboren</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="40" data-suffix=" J.">0</div>
+        <div class="stat-label">Berufserfahrung im Team</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="3" data-suffix=" Länder">0</div>
+        <div class="stat-label">Ranches in NZ, AUS & Kanada</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÜBER UNS -->
+  <section id="ueber-uns">
+    <div class="section-inner">
+      <div class="about-grid reveal">
+        <div class="about-img-wrap">
+          <img class="about-img" src="https://images.unsplash.com/photo-1574879948818-0cf5a74e576e?auto=format&fit=crop&w=800&q=80" alt="Familie Winkler auf der Durbach-Ranch" />
+          <div class="about-img-badge">
+            <div class="about-img-badge-num">seit<br/>2001</div>
+            <div class="about-img-badge-text">mit Leidenschaft</div>
+          </div>
+        </div>
+        <div class="about-text">
+          <div class="section-eyebrow">
+            <div class="section-eyebrow-dot"></div>
+            <span>Über uns</span>
+          </div>
+          <h2 class="section-title">Familie Winkler — Herz der Ranch</h2>
+          <p>Die Durbach-Ranch ist ein Familienbetrieb, gegründet von Charly und Michaela Winkler. Beide kommen aus sozial-pädagogischen Berufen und bringen zusammen rund 40 Jahre Berufserfahrung mit.</p>
+          <p>Michaela arbeitete mehrere Jahre auf Ranches in Neuseeland, Australien und Kanada und brachte diese internationale Erfahrung in die idyllische Schwarzwälder Heimat. Seit 2001 sind wir leidenschaftliche Züchter und haben über 45 Fohlen auf der Ranch aufgezogen.</p>
+          <p>Unsere Ranch liegt wunderschön zwischen malerischen Rebhängen und ausgedehnten Wäldern in Durbach. Der perfekte Ort zum Entspannen, Lernen und Träumen — für Menschen und Pferde.</p>
+          <div class="about-highlight">
+            <div class="about-highlight-title">Unsere Schwerpunkte</div>
+            <ul>
+              <li>
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                Reitschule für Kinder, Jugendliche & Erwachsene
+              </li>
+              <li>
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                Therapeutisches & heilpädagogisches Reiten
+              </li>
+              <li>
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                Quarter Horse Zucht seit 2001 (45+ Fohlen)
+              </li>
+              <li>
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                Beritt & professionelle Pferdeausbildung
+              </li>
+              <li>
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                Pensionspferde & individuelle Betreuung
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANGEBOTE -->
+  <section id="angebote">
+    <div class="section-inner">
+      <div class="section-eyebrow reveal">
+        <div class="section-eyebrow-dot"></div>
+        <span>Angebote</span>
+      </div>
+      <h2 class="section-title reveal">Unsere Leistungen</h2>
+      <p class="section-sub reveal">Von der ersten Reitstunde bis zum mehrtägigen Abenteuer — für jeden das Richtige.</p>
+      <div class="services-grid stagger">
+
+        <div class="service-card">
+          <img class="service-card-img" src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=600&q=80" alt="Reitunterricht auf der Durbach-Ranch" />
+          <div class="service-card-body">
+            <div class="service-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+            </div>
+            <h3>Reitunterricht</h3>
+            <p>Einzeln oder in Kleingruppen (max. 4 Personen) lernen Sie umfassendes Wissen rund ums Reiten und die Pferdepflege. Für Kinder 30 Minuten, für Erwachsene 60 Minuten.</p>
+            <span class="service-card-price">ab 23 € pro Einheit</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <img class="service-card-img" src="https://images.unsplash.com/photo-1566807810030-3eaa60f2f890?auto=format&fit=crop&w=600&q=80" alt="Ausritte im Schwarzwald" />
+          <div class="service-card-body">
+            <div class="service-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            </div>
+            <h3>Ausritte</h3>
+            <p>Entdecken Sie die atemberaubende Landschaft des Schwarzwalds zu Pferd. Wir bieten Routen von 1 Stunde bis zu mehrtägigen Ausritten durch Wälder und Rebhänge.</p>
+            <span class="service-card-price">ab 46 € pro Stunde</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <img class="service-card-img" src="https://images.unsplash.com/photo-1548099564-4f15f0b3e6b4?auto=format&fit=crop&w=600&q=80" alt="Ferienreitkurs für Kinder" />
+          <div class="service-card-body">
+            <div class="service-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+            </div>
+            <h3>Ferienreitkurs</h3>
+            <p>Eine ganze Woche (Mo–Fr, 9–17 Uhr) voller Spiele rund ums Pferd, Theorie, Geländeritte und Stallarbeit. Auch einzelne Tage oder halbe Tage buchbar.</p>
+            <span class="service-card-price">ab 50 € / Halbtag</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <img class="service-card-img" src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=600&q=80" alt="Jugendcamp auf der Ranch" />
+          <div class="service-card-body">
+            <div class="service-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+            </div>
+            <h3>Jugendcamp</h3>
+            <p>Exklusiv für Jugendliche ab 12 Jahren (max. 6 Teilnehmer). Drei Tage mit eigenem Pferd, Verpflegung, 3 Reitstunden, 2h-Ausritt und einem unvergesslichen Tagesausflug.</p>
+            <span class="service-card-price">3-Tage-Camp</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <img class="service-card-img" src="https://images.unsplash.com/photo-1601758124096-519737a8774d?auto=format&fit=crop&w=600&q=80" alt="Therapeutisches Reiten" />
+          <div class="service-card-body">
+            <div class="service-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            </div>
+            <h3>Therapeutisches Reiten</h3>
+            <p>Einzeln oder in kleinen Gruppen, von 15 Minuten bis einer Stunde. Heilpädagogisches und therapeutisches Reiten mit professioneller Begleitung durch erfahrene Fachkräfte.</p>
+            <span class="service-card-price">individuelle Beratung</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <img class="service-card-img" src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?auto=format&fit=crop&w=600&q=80" alt="Beritt und Zucht Quarter Horses" />
+          <div class="service-card-body">
+            <div class="service-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+            </div>
+            <h3>Beritt & Zucht</h3>
+            <p>Professionelle Ausbildung Ihres Pferdes sowie Pensionspferdebetrieb. Leidenschaftliche Quarter Horse Zucht seit 2001 mit über 45 geborenen Fohlen auf der Ranch.</p>
+            <span class="service-card-price">auf Anfrage</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PREISE -->
+  <section id="preise">
+    <div class="section-inner">
+      <div class="section-eyebrow reveal">
+        <div class="section-eyebrow-dot"></div>
+        <span>Preisliste</span>
+      </div>
+      <h2 class="section-title reveal">Transparente Preise</h2>
+      <p class="section-sub reveal">Alle Preise auf einen Blick. Zehnerkarten für Reitunterricht auf Anfrage erhältlich.</p>
+      <div class="pricing-grid stagger">
+
+        <div class="price-card">
+          <div class="price-card-tag">Reitunterricht</div>
+          <h3>Einzelstunden & Kurse</h3>
+          <p class="price-card-desc">Einzeln oder Kleingruppe (max. 4 Personen). Zehnerkarte auf Anfrage.</p>
+          <ul class="price-list">
+            <li><span class="price-list-label">30 Min (Kinder)</span><span class="price-list-val">23 €</span></li>
+            <li><span class="price-list-label">60 Min (Erwachsene)</span><span class="price-list-val">46 €</span></li>
+          </ul>
+        </div>
+
+        <div class="price-card featured">
+          <div class="price-card-tag">Ausritte</div>
+          <h3>Geländeausritte</h3>
+          <p class="price-card-desc">Durch Wälder und Rebhänge — von 1 Stunde bis zum ganzen Tag.</p>
+          <ul class="price-list">
+            <li><span class="price-list-label">1 Stunde</span><span class="price-list-val">46 €</span></li>
+            <li><span class="price-list-label">2 Stunden</span><span class="price-list-val">92 €</span></li>
+            <li><span class="price-list-label">Halbtag (~3,5 h)</span><span class="price-list-val">140 €</span></li>
+            <li><span class="price-list-label">Ganztag (~7 h)</span><span class="price-list-val">280 €</span></li>
+          </ul>
+        </div>
+
+        <div class="price-card">
+          <div class="price-card-tag">Ferienreitkurs</div>
+          <h3>Wochenkurs & Einzeltage</h3>
+          <p class="price-card-desc">Mo–Fr, 9–17 Uhr. Auch Einzeltage und Halbtage buchbar.</p>
+          <ul class="price-list">
+            <li><span class="price-list-label">1 Woche (1. Kind)</span><span class="price-list-val">360 €</span></li>
+            <li><span class="price-list-label">1 Woche (Geschwister)</span><span class="price-list-val">340 €</span></li>
+            <li><span class="price-list-label">Einzeltag</span><span class="price-list-val">90 €</span></li>
+            <li><span class="price-list-label">Halbtag</span><span class="price-list-val">50 €</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section id="galerie">
+    <div class="section-inner">
+      <div class="section-eyebrow reveal">
+        <div class="section-eyebrow-dot"></div>
+        <span>Galerie</span>
+      </div>
+      <h2 class="section-title reveal">Impressionen</h2>
+      <p class="section-sub reveal" style="margin-bottom:40px;">Einblicke in das Leben auf der Durbach-Ranch.</p>
+    </div>
+    <div class="section-inner" style="padding-top:0;">
+      <div class="gallery-grid stagger">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=900&q=80" alt="Pferde auf der Ranch" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=600&q=80" alt="Reitstunde auf der Durbach-Ranch" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1574879948818-0cf5a74e576e?auto=format&fit=crop&w=600&q=80" alt="Pferde in der Natur" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1566807810030-3eaa60f2f890?auto=format&fit=crop&w=900&q=80" alt="Ausritt im Schwarzwald" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1548099564-4f15f0b3e6b4?auto=format&fit=crop&w=600&q=80" alt="Kinder beim Ferienreitkurs" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STANDORT -->
+  <section id="einsatzgebiet">
+    <div class="section-inner">
+      <div class="location-grid reveal">
+        <div class="location-text">
+          <div class="section-eyebrow">
+            <div class="section-eyebrow-dot"></div>
+            <span>Standort</span>
+          </div>
+          <h2 class="section-title">Idyllisch in Durbach</h2>
+          <p>Die Durbach-Ranch liegt malerisch zwischen den Rebhängen und Wäldern des Schwarzwalds in Durbach — einer der schönsten Gegenden Deutschlands.</p>
+          <p>Wir sind aus Offenburg, Lahr, Kehl und dem gesamten Ortenaukreis bequem erreichbar.</p>
+          <div class="location-info">
+            <div class="location-info-item">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+              Obertal 6, 77770 Durbach
+            </div>
+            <a href="tel:078194880016" class="location-info-item">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+              07 81 / 948 80 16
+            </a>
+            <a href="mailto:durbach-ranch@t-online.de" class="location-info-item">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              durbach-ranch@t-online.de
+            </a>
+            <a href="https://www.instagram.com/durbach_ranch/" target="_blank" rel="noopener" class="location-info-item">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              @durbach_ranch auf Instagram
+            </a>
+          </div>
+        </div>
+        <div class="location-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2651.234567890123!2d7.980000!3d48.506000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47909f2b00000001%3A0x0!2sObertal%206%2C%2077770%20Durbach!5e0!3m2!1sde!2sde!4v1700000000000"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Karte Durbach-Ranch, Obertal 6, 77770 Durbach">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt">
+    <div class="section-inner">
+      <div class="contact-layout">
+        <div class="contact-left reveal">
+          <div class="section-eyebrow" style="margin-bottom:16px;">
+            <div class="section-eyebrow-dot"></div>
+            <span>Kontakt</span>
+          </div>
+          <h3>Wir freuen uns auf Sie</h3>
+          <p>Haben Sie Fragen oder möchten Sie einen Termin vereinbaren? Schreiben Sie uns oder rufen Sie einfach an — wir antworten schnell und persönlich.</p>
+          <div class="contact-items">
+            <a href="tel:078194880016" class="contact-item">
+              <div class="contact-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+              </div>
+              <div>
+                <div class="contact-label">Telefon</div>
+                <div class="contact-value">07 81 / 948 80 16</div>
+              </div>
+            </a>
+            <a href="mailto:durbach-ranch@t-online.de" class="contact-item">
+              <div class="contact-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              </div>
+              <div>
+                <div class="contact-label">E-Mail</div>
+                <div class="contact-value">durbach-ranch@t-online.de</div>
+              </div>
+            </a>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+              </div>
+              <div>
+                <div class="contact-label">Adresse</div>
+                <div class="contact-value">Obertal 6, 77770 Durbach</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form reveal">
+          <h3>Anfrage senden</h3>
+          <p>Wir melden uns in der Regel innerhalb von 24 Stunden bei Ihnen.</p>
+          <form action="https://formsubmit.co/durbach-ranch@t-online.de" method="POST">
+            <input type="hidden" name="_subject" value="Neue Anfrage über die Webseite" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="danke.html" />
+            <div class="form-row">
+              <div class="form-group">
+                <label for="vorname">Vorname</label>
+                <input type="text" id="vorname" name="vorname" placeholder="Max" autocomplete="given-name" required />
+              </div>
+              <div class="form-group">
+                <label for="nachname">Nachname</label>
+                <input type="text" id="nachname" name="nachname" placeholder="Mustermann" autocomplete="family-name" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">E-Mail</label>
+              <input type="email" id="email" name="email" placeholder="max@beispiel.de" autocomplete="email" required />
+            </div>
+            <div class="form-group">
+              <label for="interesse">Ich interessiere mich für</label>
+              <select id="interesse" name="interesse">
+                <option value="">Bitte wählen …</option>
+                <option>Reitunterricht</option>
+                <option>Ausritt</option>
+                <option>Ferienreitkurs</option>
+                <option>Jugendcamp</option>
+                <option>Therapeutisches Reiten</option>
+                <option>Beritt / Pferdeausbildung</option>
+                <option>Pensionspferd</option>
+                <option>Sonstiges</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="nachricht">Ihre Nachricht</label>
+              <textarea id="nachricht" name="nachricht" placeholder="Beschreiben Sie Ihr Anliegen, gewünschten Termin etc. …"></textarea>
+            </div>
+            <button type="submit" class="form-submit">Anfrage absenden →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo-wrap">
+            <div class="footer-logo-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 0c0 0-2 4-2 8s2 8 2 8m0-16c0 0 2 4 2 8s-2 8-2 8m-8-4h16M4.93 8h14.14"/></svg>
+            </div>
+            <div class="footer-logo-name">Durbach-Ranch</div>
+          </div>
+          <p class="footer-brand-desc">Familie Winkler · Obertal 6 · 77770 Durbach<br/>Ihr Reiterhof im Herzen des Schwarzwalds seit 2001.</p>
+          <a href="tel:078194880016" class="footer-contact-link">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+            07 81 / 948 80 16
+          </a>
+          <a href="mailto:durbach-ranch@t-online.de" class="footer-contact-link">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+            durbach-ranch@t-online.de
+          </a>
+        </div>
+        <div>
+          <div class="footer-col-title">Angebote</div>
+          <div class="footer-col-links">
+            <a href="#angebote">Reitunterricht</a>
+            <a href="#angebote">Ausritte</a>
+            <a href="#angebote">Ferienreitkurs</a>
+            <a href="#angebote">Jugendcamp</a>
+            <a href="#angebote">Therapeutisches Reiten</a>
+            <a href="#angebote">Beritt & Zucht</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Ranch</div>
+          <div class="footer-col-links">
+            <a href="#ueber-uns">Über uns</a>
+            <a href="#preise">Preisliste</a>
+            <a href="#galerie">Galerie</a>
+            <a href="#einsatzgebiet">Anfahrt</a>
+            <a href="#kontakt">Kontakt</a>
+            <a href="https://www.instagram.com/durbach_ranch/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 Durbach-Ranch · Familie Winkler · Alle Rechte vorbehalten</div>
+        <div class="footer-legal">
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+    document.addEventListener('click', e => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
+    });
+
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Sliding pill nav cursor
+    const navLinks = document.getElementById('navLinks');
+    const navCursor = document.getElementById('navCursor');
+    if (navLinks && navCursor) {
+      navLinks.querySelectorAll('li').forEach(li => {
+        li.addEventListener('mouseenter', () => {
+          const rect = li.getBoundingClientRect();
+          const parentRect = navLinks.getBoundingClientRect();
+          navCursor.style.opacity = '1';
+          navCursor.style.width = rect.width + 'px';
+          navCursor.style.left = (rect.left - parentRect.left) + 'px';
+        });
+      });
+      navLinks.addEventListener('mouseleave', () => { navCursor.style.opacity = '0'; });
+    }
+
+    // Scroll-reveal
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .stagger').forEach(el => revealObs.observe(el));
+
+    // Count-up animation
+    function animateCount(el) {
+      if (el.dataset.display) return;
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1800;
+      const start = performance.now();
+      function update(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    const statsObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.stat-number[data-target]').forEach(animateCount);
+          statsObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsBar = document.querySelector('.stats-bar');
+    if (statsBar) statsObs.observe(statsBar);
+  </script>
+
+</body>
+</html>
