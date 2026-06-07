@@ -306,6 +306,54 @@
     body.page-revealed .hero-scroll    { opacity: 1; transform: none; transition-delay: .5s; }
     body.page-revealed .tagline-bar    { opacity: 1; transform: none; transition-delay: .6s; }
 
+    /* ── FEATURES ── */
+    .features {
+      position: relative;
+      background: url('img-5.jpg') center/cover no-repeat fixed;
+      padding: 80px 24px;
+    }
+    .features::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(8,4,2,.72);
+    }
+    .features-inner {
+      position: relative;
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .feature-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 22px 24px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .feature-emoji {
+      font-size: 2.4rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .feature-text h3 {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .feature-text p {
+      font-size: .88rem;
+      color: rgba(255,255,255,.7);
+      line-height: 1.5;
+    }
+
     /* ── GESCHICHTE ── */
     .geschichte { background: var(--primary); color: #fff; }
     .geschichte .section-header h2 { color: #fff; }
@@ -768,6 +816,40 @@
       <span>Mitten in Offenburg</span>
     </div>
   </div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="features-inner stagger">
+      <div class="feature-card">
+        <div class="feature-emoji">🍕</div>
+        <div class="feature-text">
+          <h3>Frisch aus dem Ofen</h3>
+          <p>Unsere Pizza kommt heiß, knusprig und direkt aus dem Steinofen</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">🍸</div>
+        <div class="feature-text">
+          <h3>Drinks &amp; Cocktails</h3>
+          <p>Von klassisch bis wild – perfekt für deinen Abend</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">🎵</div>
+        <div class="feature-text">
+          <h3>Gute Musik &amp; Vibe</h3>
+          <p>Bar-Atmosphäre, die man fühlt – nicht nur sieht</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">📍</div>
+        <div class="feature-text">
+          <h3>Mitten in Offenburg</h3>
+          <p>Der Spot für entspannte Abende &amp; lange Nächte</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- GESCHICHTE -->
   <section class="geschichte reveal" id="geschichte">
