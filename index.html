@@ -284,6 +284,20 @@
     .stagger > * { opacity: 0; transform: translateY(24px); transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1); }
     .stagger > *.visible { opacity: 1; transform: none; }
 
+    /* ── Page enter: all elements start hidden, slide in after intro ── */
+    #nav, .hero-eyebrow, .hero h1, .hero-sub, .hero-actions, .hero-scroll, .tagline-bar {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .9s cubic-bezier(.25,0,.2,1), transform .9s cubic-bezier(.25,0,.2,1);
+    }
+    body.page-revealed #nav            { opacity: 1; transform: none; transition-delay: 0s; }
+    body.page-revealed .hero-eyebrow   { opacity: 1; transform: none; transition-delay: .12s; }
+    body.page-revealed .hero h1        { opacity: 1; transform: none; transition-delay: .28s; }
+    body.page-revealed .hero-sub       { opacity: 1; transform: none; transition-delay: .44s; }
+    body.page-revealed .hero-actions   { opacity: 1; transform: none; transition-delay: .6s; }
+    body.page-revealed .hero-scroll    { opacity: 1; transform: none; transition-delay: .8s; }
+    body.page-revealed .tagline-bar    { opacity: 1; transform: none; transition-delay: .95s; }
+
     /* ── GESCHICHTE ── */
     .geschichte { background: var(--primary); color: #fff; }
     .geschichte .section-header h2 { color: #fff; }
@@ -1113,6 +1127,8 @@
 
       function endIntro(){
         intro.classList.add('out');
+        // Trigger page elements to slide in as intro glides away
+        document.body.classList.add('page-revealed');
         setTimeout(()=>{ intro.remove(); }, 2400);
       }
 
