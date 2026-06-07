@@ -12,8 +12,8 @@
   <style>
     /* ══ INTRO ══ */
     #intro{position:fixed;inset:0;z-index:9999;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center}
-    #intro.out{animation:introFade 3s cubic-bezier(.4,0,.2,1) forwards}
-    @keyframes introFade{0%{opacity:1}40%{opacity:.8}100%{opacity:0;pointer-events:none}}
+    #intro.out{animation:introFade 1.4s cubic-bezier(.4,0,.2,1) forwards}
+    @keyframes introFade{0%{opacity:1}100%{opacity:0;pointer-events:none}}
     #intro-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
     #intro-brand{
       position:absolute;bottom:12%;width:100%;text-align:center;
@@ -287,16 +287,16 @@
     /* ── Page enter: all elements start hidden, slide in after intro ── */
     #nav, .hero-eyebrow, .hero h1, .hero-sub, .hero-actions, .hero-scroll, .tagline-bar {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity .9s cubic-bezier(.25,0,.2,1), transform .9s cubic-bezier(.25,0,.2,1);
+      transform: translateY(22px);
+      transition: opacity .6s cubic-bezier(.25,0,.2,1), transform .6s cubic-bezier(.25,0,.2,1);
     }
     body.page-revealed #nav            { opacity: 1; transform: none; transition-delay: 0s; }
-    body.page-revealed .hero-eyebrow   { opacity: 1; transform: none; transition-delay: .12s; }
-    body.page-revealed .hero h1        { opacity: 1; transform: none; transition-delay: .28s; }
-    body.page-revealed .hero-sub       { opacity: 1; transform: none; transition-delay: .44s; }
-    body.page-revealed .hero-actions   { opacity: 1; transform: none; transition-delay: .6s; }
-    body.page-revealed .hero-scroll    { opacity: 1; transform: none; transition-delay: .8s; }
-    body.page-revealed .tagline-bar    { opacity: 1; transform: none; transition-delay: .95s; }
+    body.page-revealed .hero-eyebrow   { opacity: 1; transform: none; transition-delay: .08s; }
+    body.page-revealed .hero h1        { opacity: 1; transform: none; transition-delay: .18s; }
+    body.page-revealed .hero-sub       { opacity: 1; transform: none; transition-delay: .28s; }
+    body.page-revealed .hero-actions   { opacity: 1; transform: none; transition-delay: .38s; }
+    body.page-revealed .hero-scroll    { opacity: 1; transform: none; transition-delay: .5s; }
+    body.page-revealed .tagline-bar    { opacity: 1; transform: none; transition-delay: .6s; }
 
     /* ── GESCHICHTE ── */
     .geschichte { background: var(--primary); color: #fff; }
@@ -1129,7 +1129,7 @@
         intro.classList.add('out');
         // Trigger page elements to slide in as intro glides away
         document.body.classList.add('page-revealed');
-        setTimeout(()=>{ intro.remove(); }, 3100);
+        setTimeout(()=>{ intro.remove(); }, 1500);
       }
 
       // When video ends → fade intro away
