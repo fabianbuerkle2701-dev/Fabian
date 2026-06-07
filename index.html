@@ -1132,28 +1132,32 @@
       setTimeout(()=>{ brand.classList.add('show'); }, 1000);
 
       function endIntro(){
-        // Capture last frame as a static image via canvas
+        // 1. Snapshot the last frame
         const canvas = document.createElement('canvas');
         canvas.width  = video.videoWidth  || window.innerWidth;
         canvas.height = video.videoHeight || window.innerHeight;
         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-        video.remove();
 
+        // 2. Place snapshot BEHIND the still-playing intro (opacity 0)
         const img = document.createElement('img');
         img.id = 'hero-video-bg';
         img.src = canvas.toDataURL('image/jpeg', 0.92);
-        img.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:0;transition:opacity 1.8s ease';
+        img.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:0;transition:opacity 2.8s ease';
         document.body.insertBefore(img, document.body.firstChild);
-        // Crossfade: still image fades in as intro fades out
+
+        // 3. One frame later: snapshot fades in while video is still visible
         requestAnimationFrame(()=> requestAnimationFrame(()=>{ img.style.opacity = '1'; }));
 
-        // Fade out the intro wrapper
-        intro.classList.add('out');
-        // Page content starts slightly after so the crossfade has settled
-        setTimeout(()=>{ document.body.classList.add('page-revealed'); }, 400);
-        setTimeout(()=>{ intro.remove(); }, 2300);
+        // 4. After snapshot has started its fade: dissolve the intro overlay
+        setTimeout(()=>{
+          intro.classList.add('out');          // 2.2s fade
+          document.body.classList.add('page-revealed');
+        }, 300);
 
-        // Fade out still image when hero scrolls out of view
+        // 5. Remove intro once fully invisible
+        setTimeout(()=>{ intro.remove(); }, 2600);
+
+        // 6. Fade out snapshot when hero scrolls out of view
         const heroEl = document.getElementById('hero');
         const obs = new IntersectionObserver(([e])=>{
           if(!e.isIntersecting){
